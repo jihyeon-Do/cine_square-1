@@ -1,3 +1,1 @@
 # cine_square
-
-test
