@@ -5,8 +5,8 @@ export default function Signin() {
     <div>
       <h1>로그인</h1>
       <form action="#">
-        <input type="text" />
-        <input type="password" />
+        <input type="text" placeholder="이메일주소" aria-label="email" />
+        <input type="password" placeholder="비밀번호" aria-label="password" />
         <button onClick={click}>로그인</button>
       </form>
 
