@@ -1,150 +1,90 @@
-// import React from 'react';
-
-// export default function Signin() {
-//   return (
-//     <div>
-//       <h1>로그인</h1>
-//       <form action="#">
-//         <input type="text" placeholder="이메일주소" aria-label="email" />
-//         <input type="password" placeholder="비밀번호" aria-label="password" />
-//         <button onClick={click}>로그인</button>
-//       </form>
-
-//     </div>
-//   );
-
-//   function click() {
-//     console.log('login');
-//   }
-// }
-
 import React from 'react';
 import { message } from 'antd';
 import axios from 'axios';
 import './Signin.scss'
+import { useRef, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const { Kakao } = window;
+const { naver } = window;
 
 
-export default class Signin extends React.Component {
+export default function Signin() {
 
-  state = {
-    email: ''
-  }
-  passwordRef = React.createRef(null); // 한번만들어지면 그대로 
-
+  const [email, setEmail] = useState('')
+  const passwordRef = useRef('');
+  const history = useHistory();
 
 
-  render() {
-    return (
-      <>
-        <div className="wrapper">
-          <img className="backgroundImg" src="./images/luca.jpg" alt="background" />
-          <div className="background"></div>
-          <h1><img src="./images/login_logo.png" alt="login_logo" /></h1>
-          <div className="login_form">
-            <h2>로그인</h2>
-            <form action="#">
-              <fieldset>
-                <input type="text" value={this.state.email} onChange={this.change} placeholder="이메일주소" aria-label="email" />
-                <input type="password" ref={this.passwordRef} placeholder="비밀번호" aria-label="password" />
-                <button className="login_btn" onClick={this.click}>로그인</button>
-                <button className="signup_btn" onClick={this.click}>회원가입</button>
-                <div className="social_btn">
-                  <p>소셜로그인</p>
-                  <ul>
-                    <li><button className="kakao_btn" onClick={this.kakaoLoginClickHandler}>카카오로그인</button></li>
-                    <li><button className="google_btn" >카카오로그인</button></li>
-                    <li><button className="naver_btn" >카카오로그인</button></li>
-                  </ul>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </>
-    );
-
-
-  }
-
-  kakaoLoginClickHandler = () => {
-    const history = this.props.history;
+  function loginWithKakao() {
     Kakao.Auth.login({
       success: function (authObj) {
-        if (localStorage.getItem('Kakao_token')) {
-          const cineToken = localStorage.getItem('Kakao_token');
-          fetch(`http://192.168.175.90:8080/user/signin`, {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              "cineToken": cineToken
-            })
-          })
-        }
-        fetch(`http://192.168.175.90:8080/user/apiSignup`, {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            "account": "wlgus_57@naver.com",
-            "password": "wl159357",
-            "name": "도지현",
-            "apiToken": authObj.access_token,
-          }),
+        const kakaoToken = Kakao.Auth.getAccessToken();
+        console.log(kakaoToken)
+        localStorage.removeItem('kakao_7b617f923188c842b0efaaecb0e0c1ad');
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: res => {
+            console.log(res)
+            history.push('/complete')
+          }
         })
-          .then(res => res.json())
-          .then(res => {
-            localStorage.setItem("Kakao_token", res.result);
-            if (res.result) {
-              console.log(res.result)
-              alert('로그인되었습니다.');
-              console.log(authObj)
-              history.push('/complete');
-            }
-          })
       },
       fail: function (err) {
-        alert(JSON.stringify(err));
+        alert(JSON.stringify(err))
       },
+    })
+
+  }
+
+  const initializeNaverLogin = () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: "TczK7UIIwTaztom5Lmsv",
+      callbackUrl: "http://localhost:3000/complete",
+      isPopup: false, // popup 형식으로 띄울것인지 설정
+      loginButton: { color: 'white', type: 1, height: '45' }, //버튼의 스타일, 타입, 크기를 지정
     });
+    naverLogin.init();
   };
 
-  click = async () => {
+  useEffect(() => {
+    initializeNaverLogin();
 
-    // 이메일과 패스워드를 뽑아서 서버에 보낸다. POST
-    // WEB API
-    // 무언가를 생성할 때, POST
-    // 무언가를 조회할 때, GET
-    // 무언가를 수정할 때, PATCH
-    // 무언가(resource)를 삭제할 때, DELETE
-    // ex__ book, auth, user
+  }, []);
 
-    // 로그인이란 -> 허락된 사용자인지를 체크
-    // 서버에 내가 허가된 유저인지를 체크하고, 인증 토큰을 받아오는 행위
+  return (
+    <div className="signin_wrapper">
+      <img className="backgroundImg" src="./images/luca.jpg" alt="background" />
+      <div className="background"></div>
+      {/* <h1><img src="./images/login_logo.png" alt="login_logo" /></h1> */}
+      <div className="login_form">
+        <h2>로그인</h2>
+        <form action="#" method="POST">
+          <fieldset>
+            <legend>Sign in</legend>
+            <input type="text" value={email} onChange={change} placeholder="이메일주소" aria-label="email" />
+            <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="password" />
+            <button className="login_btn" onClick={click}>로그인</button>
+            <button className="signup_btn">회원가입</button>
+            <div className="social_btn">
+              <p>소셜로그인</p>
+              <ul>
+                <li><button type="button" className="kakao_btn" onClick={loginWithKakao}>카카오로그인</button></li>
+                <li><div className="naver_btn" id='naverIdLogin' /></li>
+              </ul>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  );
 
-    // 유저 테이블
-    // 유저아이디, 유저이메일, 유저패스워드, 유저생성일...
-    // 유저 정보를 생성할 때 유저의 비밀번호를 단방향 암호화해서 넣어놓는다(보안) 
 
-    // 세션 테이블
-    // 세션아이디, 세션토큰, 세션생성일...
+  async function click() {
 
-    // 인증 토큰을 브라우저 어딘가에 저장해두고,
-    // 다른 정보를 얻어올 때, 나 인증된 유저야 라고 토큰을 함께 보낸다.
-
-    // url POST {email, password}
-    // {token: ''}
-
-    const email = this.state.email;
-    const password = this.passwordRef.current.value;
-
+    const password = passwordRef.current.value;
 
     if (email === '' || password === '') return;
-
     try {
       const response = await axios.post('https://api.marktube.tv/v1/me', { email, password })
       console.log(response);
@@ -167,17 +107,9 @@ export default class Signin extends React.Component {
         message.error(`알 수 없는 에러 ${errorCode}`)
       }
     }
-
   }
 
-
-
-  change = (e) => {
-    this.setState({ email: e.target.value });
+  function change(e) {
+    setEmail(e.target.value);
   }
-
-
-
 }
-
-
