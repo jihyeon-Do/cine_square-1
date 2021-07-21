@@ -10,6 +10,7 @@ import Complete from './pages/Complete';
 import NotFound from './pages/NotFound';
 import HeaderTemplate from './components/atom/HeaderTemplate';
 import FooterTemplate from './components/atom/FooterTemplate';
+import Signup from './pages/Signup';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <HeaderTemplate />
         <Switch>
           <Route path="/signin" component={Signin} />
+          <Route path="/signup" component={Signup} />
           <Route path="/complete" component={Complete} />
           <Route path="/" exact component={Home} />
           <Route component={NotFound} />
