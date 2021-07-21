@@ -1,7 +1,7 @@
 import React from 'react';
 import { message } from 'antd';
 import axios from 'axios';
-import './Signin.scss'
+import './signin.scss'
 import { useRef, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -21,9 +21,10 @@ export default function Signin() {
       success: function (authObj) {
         const kakaoToken = Kakao.Auth.getAccessToken();
         console.log(kakaoToken)
+        console.log(authObj)
         localStorage.removeItem('kakao_7b617f923188c842b0efaaecb0e0c1ad');
         Kakao.API.request({
-          url: '/v2/user/me',
+          // url: '/v2/user/me',
           success: res => {
             console.log(res)
             history.push('/complete')
@@ -53,24 +54,23 @@ export default function Signin() {
   }, []);
 
   return (
-    <div className="signin_wrapper">
-      <img className="backgroundImg" src="./images/luca.jpg" alt="background" />
+    <div className="signin-wrapper">
+      <img className="background-img" src="./images/luca.jpg" alt="background" />
       <div className="background"></div>
       {/* <h1><img src="./images/login_logo.png" alt="login_logo" /></h1> */}
-      <div className="login_form">
-        <h2>로그인</h2>
-        <form action="#" method="POST">
+      <div className="login-form">
+        <form>
           <fieldset>
             <legend>Sign in</legend>
-            <input type="text" value={email} onChange={change} placeholder="이메일주소" aria-label="email" />
-            <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="password" />
-            <button className="login_btn" onClick={click}>로그인</button>
-            <button className="signup_btn">회원가입</button>
-            <div className="social_btn">
+            <input type="text" value={email} onChange={change} placeholder="이메일주소" aria-label="email" name="account" />
+            <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="password" name="password" />
+            <button className="login-btn" onClick={click}>로그인</button>
+            <button className="signup-btn">회원가입</button>
+            <div className="social-btn">
               <p>소셜로그인</p>
               <ul>
                 <li><button type="button" className="kakao_btn" onClick={loginWithKakao}>카카오로그인</button></li>
-                <li><div className="naver_btn" id='naverIdLogin' /></li>
+                <li><div className="naver-btn" id='naverIdLogin' /></li>
               </ul>
             </div>
           </fieldset>
@@ -84,18 +84,18 @@ export default function Signin() {
 
     const password = passwordRef.current.value;
 
-    if (email === '' || password === '') return;
+    if (email === '' || password === '' || email == null || password == null) return;
     try {
-      const response = await axios.post('https://api.marktube.tv/v1/me', { email, password })
+      const response = await axios.post('http://localhost:8080/user/signin', { email, password })
       console.log(response);
-      const token = response.data.token;
+      // const token = response.data.token;
       // 어디 저장할까?
       // localstorage
       // 언제까지 살아있어야 하는지
-      localStorage.setItem('token', token);
+      // localStorage.setItem('token', token);
       // 홈으로 이동 시킨다.
 
-      console.log(token)
+      // console.log(token)
     } catch (error) {
       console.log(error.response.data.error);
       const errorCode = error.response.data.error
