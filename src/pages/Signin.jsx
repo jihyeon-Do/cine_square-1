@@ -11,7 +11,7 @@ const { naver } = window;
 
 export default function Signin() {
 
-  const [email, setEmail] = useState('')
+  const [account, setAccount] = useState('')
   const passwordRef = useRef('');
   const history = useHistory();
 
@@ -24,7 +24,7 @@ export default function Signin() {
         console.log(authObj)
         localStorage.removeItem('kakao_7b617f923188c842b0efaaecb0e0c1ad');
         Kakao.API.request({
-          // url: '/v2/user/me',
+          url: '/v2/user/me',
           success: res => {
             console.log(res)
             history.push('/complete')
@@ -62,9 +62,9 @@ export default function Signin() {
         <form>
           <fieldset>
             <legend>Sign in</legend>
-            <input type="text" value={email} onChange={change} placeholder="이메일주소" aria-label="email" name="account" />
-            <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="password" name="password" />
-            <button className="login-btn" onClick={click}>로그인</button>
+            <input type="text" value={account} onChange={change} placeholder="이메일주소" aria-label="account" />
+            <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="password" />
+            <button className="login-btn" onClick={click} type="button">로그인</button>
             <button className="signup-btn">회원가입</button>
             <div className="social-btn">
               <p>소셜로그인</p>
@@ -84,9 +84,9 @@ export default function Signin() {
 
     const password = passwordRef.current.value;
 
-    if (email === '' || password === '' || email == null || password == null) return;
+    if (account === '' || password === '' || account == null || password == null) return;
     try {
-      const response = await axios.post('http://localhost:8080/user/signin', { email, password })
+      const response = await axios.post('http://localhost:8080/user/signin', { account, password })
       console.log(response);
       // const token = response.data.token;
       // 어디 저장할까?
@@ -110,6 +110,6 @@ export default function Signin() {
   }
 
   function change(e) {
-    setEmail(e.target.value);
+    setAccount(e.target.value);
   }
 }
