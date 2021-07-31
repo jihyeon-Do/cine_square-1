@@ -20,6 +20,7 @@ export default function Signup() {
   // const [phoneNumber, setPhoneNumber] = useState(false)
 
   const passwordRef = useRef('');
+  const nameRef = useRef('')
   // const samePasswordRef = useRef('');
   // const phoneNumberRef = useRef('')
 
@@ -84,7 +85,7 @@ export default function Signup() {
               <p>* 인증번호가 맞지 않습니다.</p>
             </div>
             <div className="name-form">
-              <input type="text" aria-label="이름" placeholder="이름" />
+              <input ref={nameRef} type="text" aria-label="이름" placeholder="이름" />
             </div>
             <div className="phone-number-form">
               <label>핸드폰 번호 ( ' - ' 를 포함한 숫자만 입력하세요.)</label>
@@ -121,7 +122,7 @@ export default function Signup() {
             <div className="signup-btns">
               <button type="button" className="cancle">취소</button>
               {/* <button type="button" className="signup-ok" onClick={signupClick}>가입하기</button> */}
-              <button type="button" className="signup-ok">가입하기</button>
+              <button type="button" className="signup-ok" onClick={signupClick}>가입하기</button>
             </div>
             <div className="social-btn">
               <p>소셜로그인</p>
@@ -217,8 +218,21 @@ export default function Signup() {
   async function isEmail() {
     try {
       const response = await axios.post('http://localhost:8080/user/signup/valid', { account })
-      console.log(response);
+      if (response.data.result) {
+        setAccount(account)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
+  async function signupClick() {
+    const name = nameRef.current.value;
+    const password = passwordRef.current.value;
+    try {
+      const response = await axios.post('http://localhost:8080/user/signup', { account, password, name })
+      console.log(response)
+      history.push('/signin')
     } catch (error) {
       console.log(error)
     }

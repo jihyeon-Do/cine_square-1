@@ -65,7 +65,7 @@ export default function Signin() {
             <input type="text" value={account} onChange={change} placeholder="이메일주소" aria-label="account" />
             <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="password" />
             <button className="login-btn" onClick={click} type="button">로그인</button>
-            <button className="signup-btn">회원가입</button>
+            <button type="button" className="signup-btn">회원가입</button>
             <div className="social-btn">
               <p>소셜로그인</p>
               <ul>
@@ -87,7 +87,12 @@ export default function Signin() {
     if (account === '' || password === '' || account == null || password == null) return;
     try {
       const response = await axios.post('http://localhost:8080/user/signin', { account, password })
-      console.log(response);
+      const token = response.data.result.cineToken;
+      if (token) {
+        localStorage.setItem('token', token)
+        history.push('/')
+      }
+
       // const token = response.data.token;
       // 어디 저장할까?
       // localstorage
