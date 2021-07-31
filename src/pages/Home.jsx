@@ -2,6 +2,10 @@ import React from 'react';
 import './home.scss'
 
 export default function Home({ history }) {
+
+  if (!localStorage.getItem('token')) {
+    history.push('/signin')
+  }
   function goLogin() {
     history.push('/signin')
   }

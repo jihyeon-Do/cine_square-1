@@ -26,6 +26,11 @@ export default function Signup() {
 
   const history = useHistory();
 
+  if (localStorage.getItem('token')) {
+    history.push('/')
+  }
+
+
   function loginWithKakao() {
     Kakao.Auth.login({
       success: function (authObj) {
