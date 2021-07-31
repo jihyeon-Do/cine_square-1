@@ -11,9 +11,14 @@ const { naver } = window;
 
 export default function Signin() {
 
+  const history = useHistory();
+
   const [account, setAccount] = useState('')
   const passwordRef = useRef('');
-  const history = useHistory();
+
+  if (localStorage.getItem('token')) {
+    history.push('/')
+  }
 
 
   function loginWithKakao() {
@@ -65,7 +70,7 @@ export default function Signin() {
             <input type="text" value={account} onChange={change} placeholder="이메일주소" aria-label="account" />
             <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="password" />
             <button className="login-btn" onClick={click} type="button">로그인</button>
-            <button type="button" className="signup-btn">회원가입</button>
+            <button type="button" className="signup-btn" onClick={goSignup}>회원가입</button>
             <div className="social-btn">
               <p>소셜로그인</p>
               <ul>
@@ -116,5 +121,10 @@ export default function Signin() {
 
   function change(e) {
     setAccount(e.target.value);
+  }
+
+
+  function goSignup() {
+    history.push('/signup')
   }
 }
