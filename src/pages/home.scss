@@ -11,8 +11,14 @@ $article-width: 65%;
         width: 100%;
       }
     }
+    .slide-container {
+      width: 65%;
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+    }
     .rank,
-    .my-collection {
+    .my-collection-wrapper {
       padding: 80px 0;
       h2 {
         color: #000000;
@@ -23,23 +29,27 @@ $article-width: 65%;
       }
       ul {
         display: flex;
-        width: $article-width;
+        justify-content: space-around;
+        width: calc(100% * 3);
+        transform: translate(0);
+        transition: all 1s;
+        // overflow: hidden;
+        position: relative;
+        z-index: 1;
         margin: 0 auto;
-        justify-content: space-between;
-
         li {
           position: relative;
-          width: calc(100% / 5 - 2.5%);
+          width: calc(100% / 15 - 20px);
           .ranking {
-            background-color: #868686;
+            background-color: #000000ad;
             display: inline-block;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             text-align: center;
-            line-height: 50px;
+            line-height: 40px;
             box-sizing: border-box;
             color: white;
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: bold;
             margin-bottom: 0;
             position: absolute;
@@ -55,7 +65,7 @@ $article-width: 65%;
               font-weight: bold;
             }
             .movie-title {
-              font-size: 1.2em;
+              font-size: 1.1em;
 
               margin-top: 10px;
               color: black;
@@ -69,8 +79,27 @@ $article-width: 65%;
         }
       }
     }
+
     .box-office-rank {
       background-color: white;
+      position: relative;
+      button {
+        background: none;
+        position: absolute;
+        img {
+          height: 40px;
+        }
+      }
+      .prev-btn {
+        top: 50%;
+        margin-top: -20px;
+        left: 15%;
+      }
+      .next-btn {
+        top: 50%;
+        margin-top: -20px;
+        right: 15%;
+      }
     }
     .cine-square-rank {
       background-color: #cac4d3;
@@ -78,19 +107,176 @@ $article-width: 65%;
     .highly-rated-rank {
       background: white;
     }
-    .my-collection {
+    .my-collection-wrapper {
       background-color: #332052;
       h2 {
         text-align: center;
         color: white;
       }
-      ul {
-        li {
-          background-color: white;
-          width: calc(100% / 3 - 2.5%);
-          height: 200px;
+      .my-collection {
+        width: 65%;
+        margin: 0 auto;
+        ul {
+          width: 100%;
+          li {
+            background-color: white;
+            width: calc(100% / 3 - 2.5%);
+            height: 200px;
+          }
         }
       }
     }
   }
+  // .prev-active {
+  //   transform: translate(0);
+  //   transition: all 1s;
+  // }
+  // .next-active {
+  //   transform: translate(calc(-100% / 3));
+  //   transition: all 1s;
+  // }
 }
+
+// .home-main {
+//   color: #000000;
+//   background-color: white;
+//   box-sizing: border-box;
+//   .slide-container {
+//     width: 65%;
+//     position: relative;
+//     margin: 0 auto;
+//     overflow: hidden;
+
+//     ul {
+//       width: 200%;
+//       overflow: hidden;
+
+//       // margin-left: calc(-100% * 1);
+//       position: relative;
+//       z-index: 1;
+//       li {
+//         width: calc(100% / 10 - 2.5%);
+//         float: left;
+//         img {
+//           width: 100%;
+//         }
+//       }
+//     }
+//     ul::after {
+//       display: block;
+//       content: '';
+//       clear: both;
+//     }
+//   }
+//   // .slide-container::after {
+//   //   display: block;
+//   //   content: '';
+//   //   clear: both;
+//   // }
+// }
+
+// $article-width: 65%;
+
+// .home-main {
+//   p {
+//     margin: 0;
+//   }
+//   section {
+//     .slide {
+//       width: 100%;
+//       img {
+//         width: 100%;
+//       }
+//     }
+//     .rank,
+//     .my-collection {
+//       padding: 80px 0;
+//       h2 {
+//         color: #000000;
+//         font-weight: 900;
+//         width: $article-width;
+//         margin: 0 auto;
+//         padding-bottom: 20px;
+//       }
+//       ul {
+//         display: flex;
+//         //width: $article-width;
+//         margin: 0 auto;
+//         background-color: blueviolet;
+//         li {
+//           //width: calc(100% / 5 - 2%);
+//           .ranking {
+//             background-color: #868686;
+//             display: inline-block;
+//             width: 35px;
+//             height: 35px;
+//             text-align: center;
+//             line-height: 35px;
+//             box-sizing: border-box;
+//             color: white;
+//             font-size: 1.3em;
+//             font-weight: bold;
+//             margin-bottom: 0;
+//             position: absolute;
+//           }
+//           img {
+//             width: 100%;
+//             border-radius: 20px;
+//           }
+//           .movie-info {
+//             p {
+//               margin-bottom: 5px;
+//               color: red;
+//               font-weight: bold;
+//             }
+//             .movie-title {
+//               font-size: 1.2em;
+
+//               margin-top: 10px;
+//               color: black;
+//             }
+//             span {
+//               display: inline-block;
+//               margin-bottom: 5px;
+//               color: #646464;
+//             }
+//           }
+//         }
+//       }
+//       .container {
+//         width: 65%;
+//         margin: 0 auto;
+//         overflow: hidden;
+//         position: relative;
+//         .rank {
+//           display: flex;
+//           width: 100%;
+//         }
+//       }
+
+//       .box-office-rank {
+//         background-color: white;
+//       }
+//       .cine-square-rank {
+//         background-color: #cac4d3;
+//       }
+//       .highly-rated-rank {
+//         background: white;
+//       }
+//       .my-collection {
+//         background-color: #332052;
+//         h2 {
+//           text-align: center;
+//           color: white;
+//         }
+//         ul {
+//           li {
+//             background-color: white;
+//             width: calc(100% / 3 - 2.5%);
+//             height: 200px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
