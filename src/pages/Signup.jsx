@@ -26,9 +26,9 @@ export default function Signup() {
 
   const history = useHistory();
 
-  if (localStorage.getItem('token')) {
-    history.push('/')
-  }
+  // if (localStorage.getItem('token')) {
+  //   history.push('/')
+  // }
 
 
   function loginWithKakao() {

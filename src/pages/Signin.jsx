@@ -16,9 +16,9 @@ export default function Signin() {
   const [account, setAccount] = useState('')
   const passwordRef = useRef('');
 
-  if (localStorage.getItem('token')) {
-    history.push('/')
-  }
+  // if (localStorage.getItem('token')) {
+  //   history.push('/')
+  // }
 
 
   function loginWithKakao() {
