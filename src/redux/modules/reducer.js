@@ -4,6 +4,8 @@
 const START_LOADING = 'START_LOADING';
 const END_LOADING = 'END_LOADING';
 
+// 앱이름/리듀서이름/액션
+
 // function startLoading() {
 //   return {
 //     type: START_LOADING,

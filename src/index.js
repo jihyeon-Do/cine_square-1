@@ -8,14 +8,18 @@ import './styles/reset.scss';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 
-import create from './redux/create';
+import create, { sagaMiddleware } from './redux/create';
+import { createBrowserHistory } from 'history';
+import rootSaga from './redux/middleware/saga';
 
+const history = createBrowserHistory();
 // 초기화시점
-const store = create();
+export const store = create(history);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App history={history} />
   </Provider>,
   document.getElementById('root'),
 );
