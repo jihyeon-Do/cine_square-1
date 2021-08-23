@@ -3,6 +3,7 @@ body {
   font-family: RobotoInCjk, 'Noto Sans KR', 'Apple SD Gothic Neo',
     'Nanum Gothic', 'Malgun Gothic', sans-serif;
   background-color: #222222;
+  padding-top: 100px;
 }
 
 h1,
@@ -51,4 +52,12 @@ input {
   border: none;
   font-family: 'Montserrat', 'Noto Sans kr', sans-serif;
   font-weight: 500;
+}
+.a11y-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
 }

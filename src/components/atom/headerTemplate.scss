@@ -1,0 +1,65 @@
+.header-container {
+  width: 100%;
+  background-color: #222222;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  .header-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    padding: 20px 0;
+    justify-content: space-between;
+    .right-content {
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      .input-box {
+        position: relative;
+        form {
+          display: inline-block;
+        }
+        input {
+          width: 250px;
+          background: none;
+          border: #5a5a5a8a solid 2px;
+          padding: 7px 5px;
+          color: #ffffff;
+        }
+        .search-list {
+          display: none;
+          position: absolute;
+          top: 50px;
+          left: 0;
+          background-color: #1f1f1f;
+          color: #ffffff;
+          z-index: 10;
+          width: 100%;
+          box-shadow: 2px 2px 20px 2px #272727;
+          box-sizing: border-box;
+          padding: 20px;
+          ul {
+            width: 100%;
+            height: 100%;
+            li {
+              padding: 10px;
+            }
+          }
+        }
+      }
+      .my-profile-btn {
+        line-height: 40px;
+        a {
+          display: inline-block;
+          margin-left: 40px;
+          color: #ffffff;
+        }
+        a:hover {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
