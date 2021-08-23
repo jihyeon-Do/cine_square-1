@@ -455,7 +455,6 @@ export default function Home({ history }) {
             </div>
           </article>
         </section>
-        <button onClick={goLogin}>로그인</button>
       </main>
       <FooterTemplate />
     </>

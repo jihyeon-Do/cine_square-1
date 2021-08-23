@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound';
 import HeaderTemplate from './components/atom/HeaderTemplate';
 import FooterTemplate from './components/atom/FooterTemplate';
 import Signup from './pages/Signup';
+import Detail from './pages/Detail';
 
 function App({ history }) {
   return (
@@ -22,6 +23,7 @@ function App({ history }) {
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
           <Route path="/complete" component={Complete} />
+          <Route path="/detail" component={Detail} />
           <Route path="/search" component={Search} />
           <Route path="/" exact component={Home} />
           <Route component={NotFound} />

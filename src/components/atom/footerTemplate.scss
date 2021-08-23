@@ -1,7 +1,42 @@
-.footer {
+footer {
   position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
   color: white;
+  padding: 40px 0;
+  font-size: 1em;
+  a:hover {
+    color: white;
+  }
+  section {
+    text-align: center;
+    width: 500px;
+    // background-color: blue;
+    margin: 0 auto;
+    .footer-bedge {
+      width: 200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      li {
+        img {
+          height: 55px;
+        }
+      }
+      // background-color: blueviolet;
+    }
+    .footer_list {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+      li a {
+        padding: 5px;
+      }
+      li:nth-child(n + 2)::before {
+        content: '|';
+      }
+    }
+  }
 }
