@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: RobotoInCjk, 'Noto Sans KR', 'Apple SD Gothic Neo',
-    'Nanum Gothic', 'Malgun Gothic', sans-serif;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Nanum Gothic',
+    'Malgun Gothic', sans-serif;
   background-color: #222222;
   padding-top: 100px;
 }
@@ -17,6 +17,7 @@ h6 {
 }
 p {
   font-family: inherit;
+  margin: 0;
 }
 span {
   font-family: inherit;

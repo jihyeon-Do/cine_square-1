@@ -67,8 +67,8 @@ export default function Signin() {
         <form>
           <fieldset>
             <legend>Sign in</legend>
-            <input type="text" value={account} onChange={change} placeholder="이메일주소" aria-label="account" />
-            <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="password" />
+            <input type="text" value={account} onChange={change} placeholder="이메일주소" aria-label="이메일" />
+            <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="비밀번호" />
             <button className="login-btn" onClick={click} type="button">로그인</button>
             <button type="button" className="signup-btn" onClick={goSignup}>회원가입</button>
             <div className="social-btn">

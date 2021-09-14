@@ -75,6 +75,7 @@ export const startGetSearchValueActionCreator = (value) => ({
 // saga-reducer
 function* startGetSearchValueSaga(action) {
   yield put(getSearchValueStart());
+  console.log(action);
   try {
     const { value } = action.payload;
     yield put(getSearchValueSuccess(value));

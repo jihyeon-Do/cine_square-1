@@ -14,6 +14,7 @@ import HeaderTemplate from './components/atom/HeaderTemplate';
 import FooterTemplate from './components/atom/FooterTemplate';
 import Signup from './pages/Signup';
 import Detail from './pages/Detail';
+import Profile from './pages/Profile';
 
 function App({ history }) {
   return (
@@ -22,7 +23,8 @@ function App({ history }) {
         <Switch>
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
-          <Route path="/complete" component={Complete} />
+          {/* <Route path="/complete" component={Complete} /> */}
+          <Route path="/profile" component={Profile} />
           <Route path="/detail" component={Detail} />
           <Route path="/search" component={Search} />
           <Route path="/" exact component={Home} />

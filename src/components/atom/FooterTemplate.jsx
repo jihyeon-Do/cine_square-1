@@ -3,6 +3,7 @@ import './footerTemplate.scss'
 import { Link, NavLink } from 'react-router-dom';
 
 
+
 export default function FooterTemplate() {
   return (
     <footer>
@@ -22,7 +23,7 @@ export default function FooterTemplate() {
           <span>고객센터 : <a href="mailto:ehwlgus22@gmail.com?">ehwlgus22@gmail.com</a></span>
           <p>주식회사 씨네스퀘어</p>
           <p>대표 : 도지현 이정준 조수민</p>
-          <small class="copyright">
+          <small className="copyright">
             CINE SQUARE &copy; 2021 by CINESQUARE, Inc. All rights reserved.
           </small>
         </div>
