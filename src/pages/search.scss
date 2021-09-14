@@ -1,12 +1,57 @@
-main {
+$text-left-padding: 20px;
+.search-main {
   background-color: #fff;
+
   .search-results {
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
     p {
       font-size: 1.5em;
       text-align: center;
+      padding: 80px 0 40px 0;
+      margin: 0;
       span {
         font-weight: bold;
       }
+    }
+  }
+  .search-results-list {
+    width: 65%;
+    margin: 0 auto;
+    padding: 100px 0 200px 0;
+
+    h2 {
+      font-weight: bold;
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      padding-left: $text-left-padding;
+    }
+    ul {
+      width: 100%;
+      // background-color: bisque;
+      li {
+        width: calc(100% / 5);
+        float: left;
+        padding: $text-left-padding;
+        // background-color: cadetblue;
+        color: #646464;
+        font-size: 0.8rem;
+        figure {
+          margin: 0;
+          img {
+            width: 100%;
+          }
+        }
+        span::before {
+          content: ' • ';
+        }
+      }
+    }
+    ul::after {
+      content: '';
+      display: block;
+      clear: both;
     }
   }
 }

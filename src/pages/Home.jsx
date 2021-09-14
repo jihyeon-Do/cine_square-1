@@ -27,14 +27,28 @@ export default function Home({ history }) {
   }
 
 
-  useEffect(async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/movie/boxoffice')
-      setBoxoffice(response.data.result)
-    } catch (error) {
-      console.log(error)
-    }
-  }, [setBoxoffice])
+  // useEffect(async () => {
+  //   try {
+  //     const response = await axios.get('http://localhost:8080/movie/boxoffice')
+  //     setBoxoffice(response.data.result)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }, [setBoxoffice])
+
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const response = await axios.get('http://localhost:8080/movie/boxoffice')
+  //       setBoxoffice(response.data.result)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  //   fetchData();
+  // }, [setBoxoffice])
+
 
   // console.log(boxoffice)
 
@@ -167,56 +181,6 @@ export default function Home({ history }) {
                   </div></li>
                 <li>
                   <p className="ranking">10</p>
-                  <img src="../images/poupelle.jpg" alt="poupelle" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">11</p>
-                  <img src="../images/cruella.jpg" alt="cruella" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">12</p>
-                  <img src="../images/voyagers.jpg" alt="voyagers" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">13</p>
-                  <img src="../images/Fast_and_the_Furious.jpg" alt="Fast_and_the_Furious" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">14</p>
-                  <img src="../images/pipe_line.jpg" alt="pipe_line" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">15</p>
                   <img src="../images/poupelle.jpg" alt="poupelle" />
                   <div className="movie-info">
                     <p className="movie-title">크루엘라</p>
@@ -503,16 +467,20 @@ export default function Home({ history }) {
   function slidePrev() {
     if (slideIndex === 0) return;
     slideIndex -= 1;
-    slideWrap.current.style.transform = `translate(calc(-100%/3 * ${slideIndex}))`
+    slideWrap.current.style.transform = `translate(calc(-100%/2 * ${slideIndex}))`
+    prevRef.current.style.display = 'none'
+    nextRef.current.style.display = 'block'
   }
 
   function slideNext() {
-    if (slideIndex === 2) return;
+    if (slideIndex === 1) return;
     slideIndex += 1;
-    slideWrap.current.style.transform = `translate(calc(-100%/3 * ${slideIndex}))`
+    slideWrap.current.style.transform = `translate(calc(-100%/2 * ${slideIndex}))`
+    nextRef.current.style.display = 'none'
+    prevRef.current.style.display = 'block'
   }
 
   function startVideo(e) {
-    console.log(e.currentTarget)
+    // console.log(e.currentTarget)
   }
 }

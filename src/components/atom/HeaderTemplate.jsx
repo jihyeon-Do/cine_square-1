@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import { Link, NavLink } from 'react-router-dom';
 import SearchButton from '../SearchButton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,49 +7,6 @@ import { push } from 'connected-react-router';
 import { startGetSearchValueActionCreator } from '../../redux/modules/search';
 
 import './headerTemplate.scss'
-
-const result = [
-  {
-    movieCd: "187322",
-    movieNm: "극한",
-    janres: "1,16,11",
-    directors: null,
-    actors: null,
-    nations: "US",
-    openDt: "2021.05.26",
-    showTm: 133
-  },
-  {
-    movieCd: "187322",
-    movieNm: "극한직업",
-    janres: "1,16,11",
-    directors: null,
-    actors: null,
-    nations: "US",
-    openDt: "2021.05.26",
-    showTm: 133
-  },
-  {
-    movieCd: "187322",
-    movieNm: "극한의",
-    janres: "1,16,11",
-    directors: null,
-    actors: null,
-    nations: "US",
-    openDt: "2021.05.26",
-    showTm: 133
-  },
-  {
-    movieCd: "187322",
-    movieNm: "크루엘라",
-    janres: "1,16,11",
-    directors: null,
-    actors: null,
-    nations: "US",
-    openDt: "2021.05.26",
-    showTm: 133
-  }
-]
 
 export default function HeaderTemplate() {
   const [value, setValue] = useState('');
@@ -62,25 +20,31 @@ export default function HeaderTemplate() {
 
   const regexp = new RegExp(value, 'i');
 
-  const correctValue = result.filter((v) => {
-    return regexp.test(v.movieNm)
-  })
+  // const correctValue = result.filter((v) => {
+  //   return regexp.test(v.movieNm)
+  // })
 
+  // useEffect(() => {
+  //   if (value !== '') {
+  //     _setDisplay(true)
+  //   } else {
+  //     _setDisplay(false)
+  //   }
+  // }, [value])
 
-
-  useEffect(() => {
-    if (value !== '' && correctValue.length !== 0) {
-      _setDisplay(true)
-    } else {
-      _setDisplay(false)
-    }
-  }, [value, correctValue])
+  // useEffect(() => {
+  //   if (value !== '' && correctValue.length !== 0) {
+  //     _setDisplay(true)
+  //   } else {
+  //     _setDisplay(false)
+  //   }
+  // }, [value, correctValue])
 
 
   return (
     <header className="header-container">
       <div className="header-wrapper">
-        <h1 className="header">
+        <h1 className="header" onClick={() => { dispatch(push('/')) }}>
           <img src="./images/login_logo.png" alt="main_logo" />
         </h1>
         <div className="right-content">
@@ -89,7 +53,7 @@ export default function HeaderTemplate() {
             <Link to="/search" style={{ display: 'inline-block', marginLeft: '10px' }}>
               <SearchButton />
             </Link>
-            <div className="search-list" style={{ display: _display ? 'block' : 'none' }}>
+            {/* <div className="search-list" style={{ display: _display ? 'block' : 'none' }}>
               <ul>
                 {
                   result.map((v) => (
@@ -99,7 +63,7 @@ export default function HeaderTemplate() {
                     </li>
                   ))}
               </ul>
-            </div>
+            </div> */}
           </div>
           <div className="my-profile-btn">
             <Link>평가하기</Link>
@@ -115,10 +79,17 @@ export default function HeaderTemplate() {
     setValue(e.target.value);
   }
 
-  function handleKeyPress(e) {
+  async function handleKeyPress(e) {
     if (value === '') return;
     if (e.key === 'Enter') {
       console.log('enter');
+      // try {
+      //   const response = await axios.get(`http://localhost:8080/movie/search?searchWord=${value}`)
+      //   const result = response.data.result
+      //   console.log(result)
+      // } catch (error) {
+      //   console.log(error)
+      // }
       getValue();
       dispatch(push('/search'))
     }

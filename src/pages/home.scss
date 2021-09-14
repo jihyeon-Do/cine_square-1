@@ -22,7 +22,7 @@ $article-width: 65%;
       padding: 80px 0;
       h2 {
         color: #000000;
-        font-weight: 900;
+        // font-weight: 900;
         width: $article-width;
         margin: 0 auto;
         padding-bottom: 20px;
@@ -30,7 +30,7 @@ $article-width: 65%;
       ul {
         display: flex;
         justify-content: space-around;
-        width: calc(100% * 3);
+        width: calc(100% * 2);
         transform: translate(0);
         transition: all 1s;
         // overflow: hidden;
@@ -39,7 +39,7 @@ $article-width: 65%;
         margin: 0 auto;
         li {
           position: relative;
-          width: calc(100% / 15 - 20px);
+          width: calc(100% / 10 - 20px);
           .ranking {
             background-color: #000000ad;
             display: inline-block;
@@ -60,20 +60,22 @@ $article-width: 65%;
           }
           .movie-info {
             p {
-              margin-bottom: 5px;
-              color: red;
-              font-weight: bold;
+              font-size: 0.8em;
+              color: rgb(126, 126, 126);
             }
             .movie-title {
-              font-size: 1.1em;
-
+              font-size: 1em;
               margin-top: 10px;
               color: black;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
             span {
               display: inline-block;
               margin-bottom: 5px;
               color: #646464;
+              font-size: 0.8em;
             }
           }
         }
