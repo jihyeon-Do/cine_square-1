@@ -1,14 +1,37 @@
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
-import React, { useRef, useEffect, useState } from 'react';
 import './home.scss'
-import OwlCarousel from 'react-owl-carousel';
-import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 import HeaderTemplate from '../components/atom/HeaderTemplate';
 import FooterTemplate from '../components/atom/FooterTemplate';
+import VideoFrame from '../components/VideoFrame';
+import Owlslide from '../components/Owlslide';
+import VideoFrameContainer from '../containers/VideoFrameContainer';
 
 
-export default function Home({ history }) {
+function Home({ history }) {
+
+
+  const [frameVideo, setFrameVideo] = useState(false)
+
+  const [modalId, setModalId] = useState(0);
+
+  const show = useCallback((id) => {
+    setModalId(id);
+  }, []);
+  const hide = useCallback(() => {
+    setModalId(0);
+  }, []);
+
+  // const youtubeFullscreen = useCallback((url) => {
+  //   setFrameVideo(true);
+  //   window.open(url, "theFrame", "");
+  //   return url;
+  // }, [])
+
+  // const close = useCallback(() => {
+  //   setFrameVideo(false)
+  // })
 
   let slideIndex = 0
 
@@ -57,36 +80,8 @@ export default function Home({ history }) {
       <HeaderTemplate />
       <main className="home-main">
         <section>
-          <div className="slide" onClick={startVideo}>
-            <OwlCarousel
-              className='owl-theme'
-              loop margin={10}
-              nav={true}
-              items="1"
-              center={true}
-              dots={false}
-              slideBy="7"
-            >
-              <div className='item'>
-                <img src="../images/freeGuy.jpg" alt="free-guy" data-video="https://www.youtube.com/embed/LeWwoGjGklc" />
-              </div>
-              <div className='item' >
-                <img src="../images/Inzil.jpg" alt="inzil" data-video="https://www.youtube.com/embed/LeWwoGjGklc" />
-              </div>
-              <div className='item'>
-                <img src="../images/Puppy.jpg" alt="puppy" data-video="https://www.youtube.com/embed/LeWwoGjGklc" />
-              </div>
-              <div className='item'>
-                <img src="../images/Sence.jpg" alt="sence" data-video="https://www.youtube.com/embed/LeWwoGjGklc" />
-              </div>
-            </OwlCarousel>
-            <div className="play-btn">
-              <img src="../images/play.png" alt="play-btn" />
-            </div>
-            {/* <div>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/LeWwoGjGklc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div> */}
-          </div>
+          <Owlslide show={show} />
+          {modalId > 0 && <VideoFrameContainer hide={hide} id={modalId} />}
           <article className="rank box-office-rank">
             <h2>박스오피스 순위</h2>
             <div className="slide-container">
@@ -191,10 +186,8 @@ export default function Home({ history }) {
                 </li>
               </ul>
             </div>
-            <div className="pagination">
-              <button type="button" onClick={slidePrev} ref={prevRef} className={`prev-btn`}><img src="../images/prev.png" alt="prev" /></button>
-              <button type="button" onClick={slideNext} ref={nextRef} className={`next-btn`}><img src="../images/next.png" alt="next" /></button>
-            </div>
+            <button type="button" onClick={slidePrev} ref={prevRef} className={`prev-btn`}><img src="../images/prev.png" alt="prev" /></button>
+            <button type="button" onClick={slideNext} ref={nextRef} className={`next-btn`}><img src="../images/next.png" alt="next" /></button>
           </article>
 
           <article className="rank cine-square-rank">
@@ -421,6 +414,7 @@ export default function Home({ history }) {
         </section>
       </main>
       <FooterTemplate />
+
     </>
   );
   // return (
@@ -480,7 +474,7 @@ export default function Home({ history }) {
     prevRef.current.style.display = 'block'
   }
 
-  function startVideo(e) {
-    // console.log(e.currentTarget)
-  }
+
 }
+
+export default React.memo(Home)

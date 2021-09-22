@@ -1,7 +1,5 @@
+html,
 body {
-  margin: 0;
-  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Nanum Gothic',
-    'Malgun Gothic', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  width: auto !important;
+  height: auto !important;
 }
