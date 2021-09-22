@@ -23,7 +23,7 @@ function App({ history }) {
         <Switch>
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
-          {/* <Route path="/complete" component={Complete} /> */}
+          <Route path="/complete" component={Complete} />
           <Route path="/profile" component={Profile} />
           <Route path="/detail" component={Detail} />
           <Route path="/search" component={Search} />
