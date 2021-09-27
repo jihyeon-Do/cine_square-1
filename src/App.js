@@ -15,6 +15,7 @@ import FooterTemplate from './components/atom/FooterTemplate';
 import Signup from './pages/Signup';
 import Detail from './pages/Detail';
 import Profile from './pages/Profile';
+import Evaluate from './pages/Evaluate';
 
 function App({ history }) {
   return (
@@ -26,6 +27,7 @@ function App({ history }) {
           <Route path="/complete" component={Complete} />
           <Route path="/profile" component={Profile} />
           <Route path="/detail" component={Detail} />
+          <Route path="/evaluate" component={Evaluate} />
           <Route path="/search" component={Search} />
           <Route path="/" exact component={Home} />
           <Route component={NotFound} />

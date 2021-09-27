@@ -79,9 +79,9 @@ function Home({ history }) {
     <>
       <HeaderTemplate />
       <main className="home-main">
+        <Owlslide show={show} />
+        {modalId > 0 && <VideoFrameContainer hide={hide} id={modalId} />}
         <section>
-          <Owlslide show={show} />
-          {modalId > 0 && <VideoFrameContainer hide={hide} id={modalId} />}
           <article className="rank box-office-rank">
             <h2>박스오피스 순위</h2>
             <div className="slide-container">
@@ -402,8 +402,8 @@ function Home({ history }) {
             </div>
           </article>
           <article className="my-collection-wrapper">
-            <h2>마이컬렉션</h2>
             <div className="my-collection">
+              <h2>마이컬렉션</h2>
               <ul>
                 <li></li>
                 <li></li>

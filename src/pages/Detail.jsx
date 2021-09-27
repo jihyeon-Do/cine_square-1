@@ -29,6 +29,7 @@ export default function Detail() {
   const [bookmark, setBookmark] = useState(false);
   const [value, setvalue] = useState('');
   const [comments, setComments] = useState([])
+  const [seeMore, setSeeMore] = useState(false)
 
   const formtag = useRef();
 
@@ -58,6 +59,49 @@ export default function Detail() {
       <HeaderTemplate />
       <main className="detail-container">
         <section>
+          <div className="close-box" style={seeMore ? { display: 'block' } : { display: 'none' }}></div>
+          <div className="movie-info2-detail" style={seeMore ? { display: 'block' } : { display: 'none' }}>
+            <h3 aria-labelledby="기본정보 더 상세히 보기">기본 정보</h3>
+            <dl>
+              <div>
+                <dt>원제</dt>
+                <dd>싱크홀</dd>
+              </div>
+
+              <div>
+                <dt>제작연도</dt>
+                <dd>2021</dd>
+
+              </div>
+              <div>
+                <dt>국가</dt>
+                <dd>한국</dd>
+              </div>
+
+              <div>
+                <dt>장르</dt>
+                <dd>드라마/재난</dd>
+              </div>
+
+              <div>
+                <dt>상영시간</dt>
+                <dd>1시간 53분</dd>
+              </div>
+
+              <div>
+                <dt>내용</dt>
+                <dd>사.상.초.유! 도심 속 초대형 재난 발생!
+
+                  서울 입성과 함께 내 집 마련의 꿈을 이룬 가장 `동원(김성균)`. 이사 첫날부터 프로 참견러 `만수`(차승원)와 사사건건 부딪힌다. `동원`은 자가취득을 기념하며 직장 동료들을 집들이에 초대하지만 행복한 단꿈도 잠시, 순식간에 빌라 전체가 땅 속으로 떨어지고 만다.
+
+                  마주치기만 하면 투닥거리는 빌라 주민 `만수`와 `동원`.`동원`의 집들이에 왔던 `김대리`(이광수)와 인턴사원 `은주`(김혜준)까지! 지하 500m 싱크홀 속으로 떨어진 이들은 과연 무사히 빠져나갈 수 있을까?
+
+                  “한 500m 정도는 떨어진 것 같아”
+                  “우리… 나갈 수 있을까요?” </dd>
+              </div>
+            </dl>
+            <button className="close-btn" onClick={() => setSeeMore(false)}>상세정보닫기</button>
+          </div>
           <div className="poster-wrapper">
             <div className="poster-box">
               <div className="poster-box-1"></div>
@@ -107,8 +151,9 @@ export default function Detail() {
                 <p>1시간 53분 <span>12세</span></p>
                 <p className="overflow">사.상.초.유! 도심 속 초대형 재난 발생! 서울 입성과 함께 내 집 마련의 꿈을 이룬 가장 `동원(김성균)`. 이사 첫날부터 프로 참견러 `만수`(차승원)와 사사건건 부딪힌다. `동원`은 자가취득을 기념하며 직장 동료들을 집들이에 초대하지만 행복한 단꿈도 잠시, 순식간에 빌라 전체가 땅 속으로 떨어지고 만다. 마주치기만 하면 투닥거리는 빌라 주민 `만수`와 `동원`.`동원`의 집들이에 왔던 `김대리`(이광수)와 인턴사원 `은주`(김혜준)까지! 지하 500m 싱크홀 속으로 떨어진 이들은 과연 무사히 빠져나갈 수 있을까? “한 500m 정도는 떨어진 것 같아” “우리… 나갈 수 있을까요?” </p>
               </div>
-              <button>더보기</button>
+              <button onClick={() => setSeeMore(true)}>더보기</button>
             </div>
+
             <div className="movie-info3">
               <h3>출연/제작</h3>
               <ul>

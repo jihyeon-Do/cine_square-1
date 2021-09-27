@@ -45,12 +45,12 @@ export default function HeaderTemplate() {
     <header className="header-container">
       <div className="header-wrapper">
         <h1 className="header" onClick={() => { dispatch(push('/')) }}>
-          <img src="./images/login_logo.png" alt="main_logo" />
+          <img src="./images/logo_2.png" alt="main_logo" />
         </h1>
         <div className="right-content">
           <div className="input-box" role="search">
             <input ref={searchInput} onKeyUp={handleKeyPress} type="text" value={value} onChange={search} placeholder="검색" aria-label="영화검색창" />
-            <Link to="/search" style={{ display: 'inline-block', marginLeft: '10px' }}>
+            <Link to="/search" style={{ display: 'inline-block', marginLeft: '10px', verticalAlign: 'middle' }}>
               <SearchButton />
             </Link>
             {/* <div className="search-list" style={{ display: _display ? 'block' : 'none' }}>
