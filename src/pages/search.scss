@@ -5,7 +5,7 @@ $text-left-padding: 20px;
   .search-results {
     width: 100%;
     box-sizing: border-box;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #eee;
     p {
       font-size: 1.5em;
       text-align: center;
@@ -17,7 +17,7 @@ $text-left-padding: 20px;
     }
   }
   .search-results-list {
-    width: 65%;
+    width: 980px;
     margin: 0 auto;
     padding: 100px 0 200px 0;
 

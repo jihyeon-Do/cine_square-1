@@ -1,0 +1,100 @@
+.evaluate-main {
+  background-color: rgb(248, 248, 248);
+
+  .evaluate-list {
+    border: 1px solid #e2e2e2;
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: white;
+    .evaluate-header {
+      .evaluate-count {
+        padding: 40px 40px;
+        text-align: center;
+        font-size: 1.2rem;
+        span {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+      .evaluate-item {
+        text-align: center;
+        border-bottom: 2px solid #8b8b8b;
+        margin: 0 30px;
+        color: #8b8b8b;
+        font-weight: bold;
+        font-size: 0.9rem;
+        p {
+          line-height: 30px;
+        }
+      }
+    }
+    .evaluate-movie-list {
+      li {
+        padding: 15px 0;
+        margin: 0 30px;
+        display: flex;
+        border-bottom: 1px solid #e2e2e2;
+        .movie-info-poster {
+          border: 1px solid #e2e2e2;
+          border-radius: 3px;
+          overflow: hidden;
+          width: 15%;
+          img {
+            width: 100%;
+          }
+        }
+        .movie-info-detail {
+          position: relative;
+          width: 85%;
+          padding: 0 20px;
+          h4 {
+            font-size: 1rem;
+          }
+          p {
+            color: #646464;
+            font-size: 0.8rem;
+            span::before {
+              content: '•';
+              padding: 0 5px;
+              vertical-align: text-bottom;
+            }
+          }
+          .rating {
+            position: absolute;
+            bottom: 0;
+            span {
+              display: block;
+              font-size: 0.5rem;
+              margin-left: 8px;
+            }
+            section {
+              justify-self: center;
+              align-self: center;
+              align-items: center;
+              display: inline-flex;
+              position: relative;
+              height: 30px;
+              .stars {
+                height: 30px;
+                cursor: pointer;
+                svg {
+                  width: 30px;
+                  height: 30px;
+                  margin-right: 3px;
+                  position: relative;
+                  pointer-events: none;
+                }
+              }
+              .reset {
+                width: 10px;
+                height: 10px;
+                cursor: pointer;
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import styles from './VideoFrame.module.scss';
+import styles from './videoFrame.module.scss';
 
 
 const autoPalyUrl = '?rel=0;amp;autoplay=1';
