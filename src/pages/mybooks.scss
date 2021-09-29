@@ -1,0 +1,76 @@
+$border-color: rgb(223, 223, 223);
+
+.MyBooks-main {
+  h2 {
+    font-size: 1.6rem;
+    width: 100%;
+    padding: 80px 0 10px 0;
+    border-bottom: 1px solid #eee;
+    p {
+      width: 980px;
+      margin: 0 auto;
+    }
+  }
+  section {
+    padding-top: 50px;
+    .tab-menu-title {
+      ul {
+        display: flex;
+        li {
+          width: 50%;
+          border-bottom: 2px solid $border-color;
+          box-sizing: border-box;
+          button {
+            font-weight: bold;
+            padding: 10px 0;
+            width: 100%;
+            background-color: unset;
+            display: block;
+          }
+        }
+      }
+      margin-bottom: 20px;
+    }
+    .tab-menu-content1,
+    .tab-menu-content2 {
+      ul {
+        // display: flex;
+        li {
+          float: left;
+          width: calc(100% / 6);
+          padding: 15px;
+          img {
+            width: 100%;
+          }
+          p {
+            font-size: 0.8rem;
+            // padding: 5px 0;
+            font-weight: 500;
+          }
+          p:last-child {
+            color: rgb(255, 174, 0);
+            span {
+              display: inline-block;
+              padding-right: 5px;
+              vertical-align: middle;
+              svg {
+                width: 15px;
+                height: 15px;
+              }
+            }
+          }
+        }
+      }
+      ul::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+    }
+    .tab-menu-content2 {
+      p {
+        color: #000000 !important;
+      }
+    }
+  }
+}

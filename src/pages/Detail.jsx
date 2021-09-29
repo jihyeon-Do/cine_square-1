@@ -57,7 +57,15 @@ export default function Detail() {
   return (
     <>
       <HeaderTemplate />
-      <main className="detail-container">
+      <main className="detail-main">
+        <h2 className="readable-hidden">영화상세정보</h2>
+        <div className="poster-wrapper">
+          <div className="poster-box">
+            <div className="poster-box-1"></div>
+            <div className="poster-box-2"></div>
+            <div className="poster-box-3"></div>
+          </div>
+        </div>
         <section>
           <div className="close-box" style={seeMore ? { display: 'block' } : { display: 'none' }}></div>
           <div className="movie-info2-detail" style={seeMore ? { display: 'block' } : { display: 'none' }}>
@@ -102,15 +110,8 @@ export default function Detail() {
             </dl>
             <button className="close-btn" onClick={() => setSeeMore(false)}>상세정보닫기</button>
           </div>
-          <div className="poster-wrapper">
-            <div className="poster-box">
-              <div className="poster-box-1"></div>
-              <div className="poster-box-2"></div>
-              <div className="poster-box-3"></div>
-            </div>
-          </div>
+
           <div className="movie-info">
-            <h2 className="readable-hidden">영화상세정보</h2>
             <div className="movie-info1">
               <img src="../images/sinkhole_poster.jpg" alt="싱크홀포스터" />
               <div className="box2">

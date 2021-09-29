@@ -79,11 +79,12 @@ function Home({ history }) {
     <>
       <HeaderTemplate />
       <main className="home-main">
+        <h2 className="a11y-hidden">메인페이지</h2>
         <Owlslide show={show} />
         {modalId > 0 && <VideoFrameContainer hide={hide} id={modalId} />}
         <section>
           <article className="rank box-office-rank">
-            <h2>박스오피스 순위</h2>
+            <h3>박스오피스 순위</h3>
             <div className="slide-container">
               <ul ref={slideWrap}>
                 <li>
@@ -191,7 +192,7 @@ function Home({ history }) {
           </article>
 
           <article className="rank cine-square-rank">
-            <h2>씨네스퀘어 영화 순위</h2>
+            <h3>씨네스퀘어 영화 순위</h3>
             <div className="slide-container">
               <ul>
                 <li>
@@ -297,7 +298,7 @@ function Home({ history }) {
           </article>
 
           <article className="rank highly-rated-rank">
-            <h2>평균 별점 높은 순위</h2>
+            <h3>평균 별점 높은 순위</h3>
             <div className="slide-container">
               <ul>
                 <li>
@@ -403,12 +404,13 @@ function Home({ history }) {
           </article>
           <article className="my-collection-wrapper">
             <div className="my-collection">
-              <h2>마이컬렉션</h2>
-              <ul>
+              <h3>마이컬렉션</h3>
+              {/* <ul>
                 <li></li>
                 <li></li>
                 <li></li>
-              </ul>
+              </ul> */}
+              <div></div>
             </div>
           </article>
         </section>

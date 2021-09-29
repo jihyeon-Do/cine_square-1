@@ -3,6 +3,7 @@ import FooterTemplate from '../components/atom/FooterTemplate';
 import HeaderTemplate from '../components/atom/HeaderTemplate'
 import '../pages/profile.scss';
 import { Chart, registerables } from 'chart.js';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function Profile() {
 
@@ -47,34 +48,35 @@ export default function Profile() {
     <>
       <HeaderTemplate />
       <main className="profile-main">
-        <section>
-          <div className="profile-info">
-            <h2 className="a11y-hidden">프로필 기본 정보</h2>
-            <div>
-              {/* <p>프로필 사진 업로드하기 <span>(jpg, png, jpeg)</span></p> */}
-              <div className="user-image-wrapper">
-                <div className="user-image-box">
-                  <label htmlFor="file_upload" className="custom-thumbnail-label">
-                    <input id="file_upload" onChange={hanedleImgChange} ref={imageRef} className="custom-thumbnail-input" type="file" alt="profile-image" aria-label="프로필사진" accept="image/jpeg, image/png, image/jpg, image/webp" required />
-                    <div className="profile-thumb" style={{ "backgroundImage": `url(${imgUrl})` }} />
-                  </label>
-                </div>
-              </div>
-              <div className="user-info-box">
-                <form>
-                  <div className="profile-name user-profile">
-                    <label htmlFor="user_name">이름</label>
-                    <input type="text" id="user_name" />
-                  </div>
-                  <div className="profile-email user-profile">
-                    <label htmlFor="user_email">이메일</label>
-                    <input type="text" id="user_email" />
-                  </div>
-                  <button className="modify">수정하기</button>
-                </form>
+        <h2 className="a11y-hidden">프로필 기본 정보</h2>
+        <div className="profile-info">
+          <div>
+            {/* <p>프로필 사진 업로드하기 <span>(jpg, png, jpeg)</span></p> */}
+            <div className="user-image-wrapper">
+              <div className="user-image-box">
+                <label htmlFor="file_upload" className="custom-thumbnail-label">
+                  <input id="file_upload" onChange={hanedleImgChange} ref={imageRef} className="custom-thumbnail-input" type="file" alt="profile-image" aria-label="프로필사진" accept="image/jpeg, image/png, image/jpg, image/webp" required />
+                  <div className="profile-thumb" style={{ "backgroundImage": `url(${imgUrl})` }} />
+                </label>
               </div>
             </div>
+            <div className="user-info-box">
+              <form>
+                <div className="profile-name user-profile">
+                  <label htmlFor="user_name">이름</label>
+                  <input type="text" id="user_name" />
+                </div>
+                <div className="profile-email user-profile">
+                  <label htmlFor="user_email">이메일</label>
+                  <input type="text" id="user_email" />
+                </div>
+                <button className="modify">수정하기</button>
+              </form>
+            </div>
           </div>
+        </div>
+        <section>
+
           <div className="profile-full-info">
             <h2 className="a11y-hidden">나의 프로필 상세정보</h2>
             <div className="profile-info-cont1 cont">
@@ -127,7 +129,28 @@ export default function Profile() {
                   <img src="../images/poupelle.jpg" alt="poupelle" />
                 </li>
               </ul>
-              <button>더보기</button>
+              <Link to="/mybooks">더보기</Link>
+            </div>
+            <div className="profile-info-cont6 cont">
+              <h3>마이 컬렉션</h3>
+              <ul>
+                <li>
+                  <img src="../images/cruella.jpg" alt="cruella" />
+                </li>
+                <li>
+                  <img src="../images/voyagers.jpg" alt="voyagers" />
+                </li>
+                <li>
+                  <img src="../images/Fast_and_the_Furious.jpg" alt="Fast_and_the_Furious" />
+                </li>
+                <li>
+                  <img src="../images/pipe_line.jpg" alt="pipe_line" />
+                </li>
+                <li>
+                  <img src="../images/poupelle.jpg" alt="poupelle" />
+                </li>
+              </ul>
+              <Link to="/mybooks">더보기</Link>
             </div>
           </div>
         </section>

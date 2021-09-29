@@ -9,6 +9,10 @@ body {
 main {
   height: 100%;
   padding-top: 65px;
+  & > section {
+    width: 980px;
+    margin: 0 auto;
+  }
 }
 
 h1,

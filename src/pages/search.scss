@@ -17,8 +17,6 @@ $text-left-padding: 20px;
     }
   }
   .search-results-list {
-    width: 980px;
-    margin: 0 auto;
     padding: 100px 0 200px 0;
 
     h2 {
@@ -35,14 +33,14 @@ $text-left-padding: 20px;
         float: left;
         padding: $text-left-padding;
         // background-color: cadetblue;
-        color: #646464;
+        color: #000000;
         font-size: 0.8rem;
-        figure {
-          margin: 0;
-          img {
-            width: 100%;
-          }
+        // figure {
+        // margin: 0;
+        img {
+          width: 100%;
         }
+        // }
         span::before {
           content: ' • ';
         }

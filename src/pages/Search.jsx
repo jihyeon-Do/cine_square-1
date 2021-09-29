@@ -23,58 +23,64 @@ export default function Search() {
             </ul> */}
             <ul>
               <li>
-                <Link>
-                  <figure>
-                    <img src="../images/cruella.jpg" alt="cruella" />
-                    <figcaption>크루엘라</figcaption>
-                  </figure>
-                  <p>2021.05.26 <span>미국</span></p>
-                </Link>
+                {/* <Link>
+                  <figure> */}
+                <img src="../images/cruella.jpg" alt="cruella" />
+                <p>크루엘라</p>
+                {/* <figcaption>크루엘라</figcaption> */}
+                {/* </figure> */}
+                <p>2021.05.26 <span>미국</span></p>
+                {/* </Link> */}
               </li>
               <li>
-                <Link>
-                  <figure>
-                    <img src="../images/cruella.jpg" alt="cruella" />
-                    <figcaption>크루엘라</figcaption>
-                  </figure>
-                  <p>2021.05.26 <span>미국</span></p>
-                </Link>
+                {/* <Link>
+                  <figure> */}
+                <img src="../images/cruella.jpg" alt="cruella" />
+                <p>크루엘라</p>
+                {/* <figcaption>크루엘라</figcaption> */}
+                {/* </figure> */}
+                <p>2021.05.26 <span>미국</span></p>
+                {/* </Link> */}
               </li>
               <li>
-                <Link>
-                  <figure>
-                    <img src="../images/cruella.jpg" alt="cruella" />
-                    <figcaption>크루엘라</figcaption>
-                  </figure>
-                  <p>2021.05.26 <span>미국</span></p>
-                </Link>
+                {/* <Link>
+                  <figure> */}
+                <img src="../images/cruella.jpg" alt="cruella" />
+                <p>크루엘라</p>
+                {/* <figcaption>크루엘라</figcaption> */}
+                {/* </figure> */}
+                <p>2021.05.26 <span>미국</span></p>
+                {/* </Link> */}
               </li>
               <li>
-                <Link>
-                  <figure>
-                    <img src="../images/cruella.jpg" alt="cruella" />
-                    <figcaption>크루엘라</figcaption>
-                  </figure>
-                  <p>2021.05.26 <span>미국</span></p>
-                </Link>
+                {/* <Link>
+                  <figure> */}
+                <img src="../images/cruella.jpg" alt="cruella" />
+                <p>크루엘라</p>
+                {/* <figcaption>크루엘라</figcaption> */}
+                {/* </figure> */}
+                <p>2021.05.26 <span>미국</span></p>
+                {/* </Link> */}
               </li>
               <li>
-                <Link>
-                  <figure>
-                    <img src="../images/cruella.jpg" alt="cruella" />
-                    <figcaption>크루엘라</figcaption>
-                  </figure>
-                  <p>2021.05.26 <span>미국</span></p>
-                </Link>
+                {/* <Link>
+                  <figure> */}
+                <img src="../images/cruella.jpg" alt="cruella" />
+                <p>크루엘라</p>
+                {/* <figcaption>크루엘라</figcaption> */}
+                {/* </figure> */}
+                <p>2021.05.26 <span>미국</span></p>
+                {/* </Link> */}
               </li>
               <li>
-                <Link>
-                  <figure>
-                    <img src="../images/cruella.jpg" alt="cruella" />
-                    <figcaption>크루엘라</figcaption>
-                  </figure>
-                  <p>2021.05.26 <span>미국</span></p>
-                </Link>
+                {/* <Link>
+                  <figure> */}
+                <img src="../images/cruella.jpg" alt="cruella" />
+                <p>크루엘라</p>
+                {/* <figcaption>크루엘라</figcaption> */}
+                {/* </figure> */}
+                <p>2021.05.26 <span>미국</span></p>
+                {/* </Link> */}
               </li>
             </ul>
           </div>

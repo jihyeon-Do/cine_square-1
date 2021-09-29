@@ -16,6 +16,7 @@ import Signup from './pages/Signup';
 import Detail from './pages/Detail';
 import Profile from './pages/Profile';
 import Evaluate from './pages/Evaluate';
+import MyBooks from './pages/MyBooks';
 
 function App({ history }) {
   return (
@@ -28,6 +29,7 @@ function App({ history }) {
           <Route path="/profile" component={Profile} />
           <Route path="/detail" component={Detail} />
           <Route path="/evaluate" component={Evaluate} />
+          <Route path="/mybooks" component={MyBooks} />
           <Route path="/search" component={Search} />
           <Route path="/" exact component={Home} />
           <Route component={NotFound} />

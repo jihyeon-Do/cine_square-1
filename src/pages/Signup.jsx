@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import './signup.scss';
+import SignupComplete from '../components/SignupComplete';
 
 const { Kakao } = window;
 const { naver } = window;
@@ -69,6 +70,8 @@ export default function Signup() {
 
   return (
     <main role="main" className="signup-main">
+      <h1 className="a11y-hidden">회원가입 페이지</h1>
+
       <section className="signup-wrapper">
         <form action="#" className="signup-form">
           <fieldset>
@@ -139,6 +142,7 @@ export default function Signup() {
           </fieldset>
         </form>
       </section>
+      <SignupComplete />
     </main>
   )
 
