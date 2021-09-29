@@ -60,6 +60,7 @@ export default function Signin() {
 
   return (
     <div className="signin-wrapper">
+      <h1 className="a11y-hidden">로그인 페이지</h1>
       <img className="background-img" src="./images/luca.jpg" alt="background" />
       <div className="background"></div>
       {/* <h1><img src="./images/login_logo.png" alt="login_logo" /></h1> */}

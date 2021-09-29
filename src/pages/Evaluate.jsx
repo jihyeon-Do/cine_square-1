@@ -10,8 +10,9 @@ function Evaluate() {
     <>
       <HeaderTemplate />
       <main className="evaluate-main">
+        <h2 className="a11y-hidden">영화 평가하기</h2>
+
         <section>
-          <h2 className="a11y-hidden">영화 평가하기</h2>
           <div className="evaluate-list">
             <div className="evaluate-header">
               <div className="evaluate-count">

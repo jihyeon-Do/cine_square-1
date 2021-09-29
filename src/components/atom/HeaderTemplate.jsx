@@ -8,6 +8,8 @@ import { startGetSearchValueActionCreator } from '../../redux/modules/search';
 
 import './headerTemplate.scss'
 
+const token = '1234'
+
 export default function HeaderTemplate() {
   const [value, setValue] = useState('');
   const [_display, _setDisplay] = useState(false);
@@ -66,8 +68,20 @@ export default function HeaderTemplate() {
             </div> */}
           </div>
           <div className="my-profile-btn">
-            <Link>평가하기</Link>
-            <Link>내정보</Link>
+            {token && (
+              <div>
+                <Link to="/evaluate">평가하기</Link>
+                <Link to="/profile">내정보</Link>
+              </div>
+
+            )}
+            {!token && (
+              <div>
+                <Link to="/signin">로그인</Link>
+                <Link to="/signup">회원가입</Link>
+              </div>
+            )
+            }
           </div>
         </div>
       </div>
