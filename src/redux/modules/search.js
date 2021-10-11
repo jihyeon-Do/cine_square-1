@@ -9,7 +9,7 @@ const GET_SEARCHVALUE_START = `${prefix}/GET_SEARCHVALUE_START`;
 const GET_SEARCHVALUE_SUCCESS = `${prefix}/GET_SEARCHVALUE_SUCCESS`;
 const GET_SEARCHVALUE_FAIL = `${prefix}/GET_SEARCHVALUE_FAIL`;
 
-// action creator
+// 2. 액션 생성자 함수 action creator
 const getSearchValueStart = () => ({
   type: GET_SEARCHVALUE_START,
 });
@@ -24,14 +24,14 @@ const getSearchValueFail = (error) => ({
   error,
 });
 
-// initial state
+// 3. initial state
 const initialState = {
   value: '',
   loading: false,
   error: null,
 };
 
-// reducer
+// 4. reducer
 export default function reducer(state = initialState, action) {
   const value = action.value;
   switch (action.type) {
@@ -60,11 +60,12 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-// saga-action
+// 5. saga-action
 const START_GET_SEARCH_VALUE = 'START_GET_SEARCH_VALUE';
 // const SUCCESS_GET_SEARCH_VALUE = `${prefix}/SUCCESS_GET_SEARCH_VALUE`;
 // const FAIL_GET_SEARCH_VALUE = `${prefix}/FAIL_GET_SEARCH_VALUE`;
 
+// 6. saga-action 생성자 만들기
 export const startGetSearchValueActionCreator = (value) => ({
   type: START_GET_SEARCH_VALUE,
   payload: {
@@ -72,7 +73,7 @@ export const startGetSearchValueActionCreator = (value) => ({
   },
 });
 
-// saga-reducer
+// 7. saga-reducer
 function* startGetSearchValueSaga(action) {
   yield put(getSearchValueStart());
   console.log(action);
@@ -85,6 +86,7 @@ function* startGetSearchValueSaga(action) {
   }
 }
 
+// 8. 최종 saga-reducer
 export function* getSearchValueSaga() {
   yield takeEvery(START_GET_SEARCH_VALUE, startGetSearchValueSaga);
 }
