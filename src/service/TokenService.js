@@ -1,4 +1,4 @@
-const LOCALSTORAGE_KEY = 'token';
+const LOCALSTORAGE_KEY = 'cine_token';
 
 export default class TokenService {
   static save(token) {
@@ -7,5 +7,9 @@ export default class TokenService {
 
   static get() {
     return localStorage.getItem(LOCALSTORAGE_KEY);
+  }
+
+  static delete() {
+    return localStorage.removeItem(LOCALSTORAGE_KEY);
   }
 }
