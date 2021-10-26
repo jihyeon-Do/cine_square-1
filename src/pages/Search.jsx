@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './search.scss';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderTemplate from '../components/atom/HeaderTemplate';
 import FooterTemplate from '../components/atom/FooterTemplate';
+import axios from 'axios';
 
 export default function Search() {
   // const dispatch = useDispatch();
   const value = useSelector(state => state.search.value);
+  console.log(value);
+
+  useEffect(() => {
+    async function searchList() {
+      try {
+        // const response = await axios.post(`http://cinesquare.yahmedora.com:8080/movie/search?searchWord=${value}`, value)
+        // console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    searchList();
+  })
   return (
     <>
       <HeaderTemplate />
