@@ -106,7 +106,6 @@ export default function Signin() {
       // localStorage.setItem('token', token);
       // 홈으로 이동 시킨다.
 
-      // console.log(token)
     } catch (error) {
       console.log(error.response.data.error);
       const errorCode = error.response.data.error
