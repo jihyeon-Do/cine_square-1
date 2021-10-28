@@ -2,6 +2,9 @@
 
 ## 시연 동영상
 
+![cinesquare-main](./public/images/cine-square%20main.PNG)
+👉 video : [cine-square](https://www.loom.com/share/b24a5153e7e44361bc68dbb16b5bb1b5)
+
 ---
 
 ## 개발 인원
@@ -31,6 +34,18 @@
 
 ## 사용기술
 
+- html5
+- scss(sass)
+- javascript
+- react
+- redux
+- redux-saga
+- axios
+- antd
+- chart.js
+- connected-react-router
+- react-owl-carousel
+
 ---
 
 ## 주요기능
@@ -48,6 +63,7 @@
 
 ```
 $ git clone 'https://github.com/Cine-Square/cine_square.git'
+$ git checkout develop
 $ npm install
 ```
 
