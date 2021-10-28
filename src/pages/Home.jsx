@@ -16,8 +16,6 @@ function Home({ history }) {
 
   const dispatch = useDispatch();
   const boxOfficeList = useSelector((state) => state.boxoffice.boxOfficeList);
-  const [frameVideo, setFrameVideo] = useState(false)
-
   const [modalId, setModalId] = useState(0);
 
   const show = useCallback((id) => {
@@ -27,18 +25,6 @@ function Home({ history }) {
     setModalId(0);
   }, []);
 
-  // const youtubeFullscreen = useCallback((url) => {
-  //   setFrameVideo(true);
-  //   window.open(url, "theFrame", "");
-  //   return url;
-  // }, [])
-
-  // const close = useCallback(() => {
-  //   setFrameVideo(false)
-  // })
-
-
-
   //  if (!localStorage.getItem('token')) {
   //   history.push('/signin')
   // }
@@ -46,17 +32,6 @@ function Home({ history }) {
   function goLogin() {
     history.push('/signin')
   }
-
-
-  // useEffect(async () => {
-  //   try {
-  //     const response = await axios.get('http://localhost:8080/movie/boxoffice')
-  //     setBoxoffice(response.data.result)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }, [setBoxoffice])
-
 
   // useEffect(() => {
   //   async function fetchData() {

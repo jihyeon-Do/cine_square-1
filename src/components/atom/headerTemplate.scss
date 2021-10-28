@@ -32,6 +32,18 @@
           color: #ffffff;
           font-weight: normal;
         }
+        .search-button {
+          width: 35px;
+          height: 32px;
+          background: url(../../images/search.png) no-repeat 0 0;
+          background-size: contain;
+          text-indent: -9999px;
+          overflow: hidden;
+          font-size: 0;
+          margin-left: 8px;
+          vertical-align: middle;
+        }
+
         .search-list {
           display: none;
           position: absolute;

@@ -1,47 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import { Link, NavLink } from 'react-router-dom';
-import SearchButton from '../SearchButton';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+// import SearchButton from '../SearchButton';
+import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { startGetSearchValueActionCreator } from '../../redux/modules/search';
 
 import './headerTemplate.scss'
 
-const token = ''
+const token = '1234'
 
 export default function HeaderTemplate() {
   const [value, setValue] = useState('');
-  const [_display, _setDisplay] = useState(false);
   const searchInput = useRef();
+  const searchClickButton = useRef();
   const dispatch = useDispatch();
 
   const getValue = React.useCallback(() => {
     dispatch(startGetSearchValueActionCreator(value));
   }, [dispatch, value]);
-
-  const regexp = new RegExp(value, 'i');
-
-  // const correctValue = result.filter((v) => {
-  //   return regexp.test(v.movieNm)
-  // })
-
-  // useEffect(() => {
-  //   if (value !== '') {
-  //     _setDisplay(true)
-  //   } else {
-  //     _setDisplay(false)
-  //   }
-  // }, [value])
-
-  // useEffect(() => {
-  //   if (value !== '' && correctValue.length !== 0) {
-  //     _setDisplay(true)
-  //   } else {
-  //     _setDisplay(false)
-  //   }
-  // }, [value, correctValue])
-
 
   return (
     <header className="header-container">
@@ -51,10 +28,8 @@ export default function HeaderTemplate() {
         </h1>
         <div className="right-content">
           <div className="input-box" role="search">
-            <input ref={searchInput} onKeyUp={handleKeyPress} type="text" value={value} onChange={search} placeholder="검색" aria-label="영화검색창" />
-            <Link to="/search" style={{ display: 'inline-block', marginLeft: '10px', verticalAlign: 'middle' }}>
-              <SearchButton />
-            </Link>
+            <input ref={searchInput} onKeyUp={(e) => handleSearch(e)} type="text" value={value} onChange={search} placeholder="검색" aria-label="영화검색창" />
+            <button ref={searchClickButton} className="search-button" onClick={(e) => handleSearch(e)}>검색버튼</button>
             {/* <div className="search-list" style={{ display: _display ? 'block' : 'none' }}>
               <ul>
                 {
@@ -93,10 +68,9 @@ export default function HeaderTemplate() {
     setValue(e.target.value);
   }
 
-  async function handleKeyPress(e) {
+  async function handleSearch(e) {
     if (value === '') return;
-    if (e.key === 'Enter') {
-      console.log('enter');
+    if (e.key === 'Enter' || e.target === searchClickButton.current) {
       // try {
       //   const response = await axios.get(`http://localhost:8080/movie/search?searchWord=${value}`)
       //   const result = response.data.result
