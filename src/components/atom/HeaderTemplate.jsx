@@ -8,7 +8,7 @@ import { startGetSearchValueActionCreator } from '../../redux/modules/search';
 
 import './headerTemplate.scss'
 
-const token = '1234'
+const token = ''
 
 export default function HeaderTemplate() {
   const [value, setValue] = useState('');
