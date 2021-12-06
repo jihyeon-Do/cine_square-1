@@ -92,12 +92,12 @@ export default function Signin() {
 
     if (account === '' || password === '' || account == null || password == null) return;
     try {
-      const response = await axios.post('http://localhost:8080/user/signin', { account, password })
-      const token = response.data.result.cineToken;
-      if (token) {
-        localStorage.setItem('token', token)
-        history.push('/')
-      }
+      // const response = await axios.post('http://cinesquare.yahmedora.com:8080/user/signin', { account, password })
+      // const token = response.data.result.cineToken;
+      // if (token) {
+      //   localStorage.setItem('token', token)
+      //   history.push('/')
+      // }
 
       // const token = response.data.token;
       // 어디 저장할까?

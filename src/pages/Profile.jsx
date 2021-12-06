@@ -4,12 +4,16 @@ import HeaderTemplate from '../components/atom/HeaderTemplate'
 import '../pages/profile.scss';
 import { Chart, registerables } from 'chart.js';
 import { Link, NavLink } from 'react-router-dom';
+import axios from 'axios';
+
 
 export default function Profile() {
 
   const [imgUrl, setImgUrl] = useState(null)
   const imageRef = useRef('')
   const canvasDom = useRef(null);
+
+  const cineToken = localStorage.getItem('token');
 
   useEffect(() => {
     const ctx = canvasDom.current.getContext('2d');
@@ -44,6 +48,22 @@ export default function Profile() {
     const objectURL = URL.createObjectURL(fileUrl);
     setImgUrl(objectURL)
   }
+
+  // async function userInfoFunc () {
+  //   try {
+  //     const response = await axios({
+  //       method:'POST',
+  //       url:'http://localhost:8080/user/userInfo',
+  //       data: {
+  //         cineToken
+  //       },
+  //     })
+  //     return response
+  //   }catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
   return (
     <>
       <HeaderTemplate />
@@ -64,11 +84,11 @@ export default function Profile() {
               <form>
                 <div className="profile-name user-profile">
                   <label htmlFor="user_name">이름</label>
-                  <input type="text" id="user_name" />
+                  <input type="text" id="user_name" placeholder={``} />
                 </div>
                 <div className="profile-email user-profile">
                   <label htmlFor="user_email">이메일</label>
-                  <input type="text" id="user_email" />
+                  <input type="text" id="user_email" placeholder={``} />
                 </div>
                 <button className="modify">수정하기</button>
               </form>

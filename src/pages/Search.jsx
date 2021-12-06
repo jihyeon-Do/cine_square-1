@@ -8,27 +8,30 @@ import axios from 'axios';
 
 export default function Search() {
   // const dispatch = useDispatch();
-  const value = useSelector(state => state.search.value);
-  console.log(value);
+  const searchWord = useSelector(state => state.search.value);
+
 
   useEffect(() => {
     async function searchList() {
+      if (searchWord === '' || searchWord === null) return;
       try {
-        // const response = await axios.post(`http://cinesquare.yahmedora.com:8080/movie/search?searchWord=${value}`, value)
+        // const response = await axios.get(`http://localhost:8080/movie/search?searchWord=${searchWord}`)
         // console.log(response)
+        // return response.data.result
       } catch (error) {
         console.log(error)
       }
     }
     searchList();
-  })
+  }, [searchWord])
+
   return (
     <>
       <HeaderTemplate />
       <main className="search-main">
         <section>
           <div className="search-results">
-            <p><span>{`'${value}'`}</span>(으)로 검색한 결과입니다.</p>
+            <p><span>{`'${searchWord}'`}</span>(으)로 검색한 결과입니다.</p>
           </div>
           <div className="search-results-list">
             <h2>검색결과</h2>

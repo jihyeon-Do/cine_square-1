@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import './signup.scss';
 import SignupComplete from '../components/SignupComplete';
+import ConfirmModal from '../components/ConfirmModal';
 
 const { Kakao } = window;
 const { naver } = window;
@@ -79,16 +80,15 @@ export default function Signup() {
             <div className="account-form">
               <div>
                 <input value={account} onChange={change} type="text" aria-label="이메일" placeholder="이메일주소" />
-                <button type="button" onClick={isEmail}>중복확인</button>
+                {/* <button type="button" onClick={isEmail}>중복확인</button> */}
               </div>
               {/* <p className={confirmAccount ? 'comfirm-active' : ''}>* 이메일 형식에 맞지 않습니다</p> */}
               <p>* 이메일 형식에 맞지 않습니다</p>
-
             </div>
             <div className="certification-number-form">
               <div>
                 <input type="text" aria-label="인증번호" placeholder="인증번호입력" />
-                <button type="submit">인증하기</button>
+                <button type="button">인증하기</button>
               </div>
               <p>* 인증번호가 맞지 않습니다.</p>
             </div>
@@ -130,7 +130,7 @@ export default function Signup() {
             <div className="signup-btns">
               <button type="button" className="cancle">취소</button>
               {/* <button type="button" className="signup-ok" onClick={signupClick}>가입하기</button> */}
-              <button type="button" className="signup-ok" onClick={signupClick}>가입하기</button>
+              {/* <button type="button" className="signup-ok" onClick={signupClick}>가입하기</button> */}
             </div>
             <div className="social-btn">
               <p>소셜로그인</p>
@@ -143,6 +143,7 @@ export default function Signup() {
         </form>
       </section>
       <SignupComplete />
+      <ConfirmModal />
     </main>
   )
 
@@ -224,28 +225,28 @@ export default function Signup() {
     }
   }*/
 
-  async function isEmail() {
-    try {
-      const response = await axios.post('http://localhost:8080/user/signup/valid', { account })
-      if (response.data.result) {
-        setAccount(account)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // async function isEmail() {
+  //   try {
+  //     const response = await axios.post('http://localhost:8080/user/signup/valid', { account })
+  //     if (response.data.result) {
+  //       setAccount(account)
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  async function signupClick() {
-    const name = nameRef.current.value;
-    const password = passwordRef.current.value;
-    try {
-      const response = await axios.post('http://localhost:8080/user/signup', { account, password, name })
-      console.log(response)
-      history.push('/signin')
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // async function signupClick() {
+  //   const name = nameRef.current.value;
+  //   const password = passwordRef.current.value;
+  //   try {
+  //     const response = await axios.post('http://localhost:8080/user/signup', { account, password, name })
+  //     console.log(response)
+  //     history.push('/signin')
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 }
 
 // var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
