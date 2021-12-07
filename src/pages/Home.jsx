@@ -45,7 +45,7 @@ function Home({ history }) {
   //   fetchData();
   // }, [setBoxoffice])
 
-  const getBoxOfficeList = React.useCallback(() => {
+  const getBoxOfficeList = useCallback(() => {
     dispatch(startGetBoxOfficeListActionCreator());
   }, [dispatch]);
 

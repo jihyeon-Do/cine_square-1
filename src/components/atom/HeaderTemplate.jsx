@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import SearchButton from '../SearchButton';
@@ -8,7 +8,9 @@ import { startGetSearchValueActionCreator } from '../../redux/modules/search';
 
 import './headerTemplate.scss'
 
-const token = '1234';
+// const token = '';
+const token = localStorage.getItem('token');
+
 
 export default function HeaderTemplate() {
   const [value, setValue] = useState('');
@@ -16,7 +18,7 @@ export default function HeaderTemplate() {
   const searchClickButton = useRef();
   const dispatch = useDispatch();
 
-  const getValue = React.useCallback(() => {
+  const getValue = useCallback(() => {
     dispatch(startGetSearchValueActionCreator(value));
   }, [dispatch, value]);
 
