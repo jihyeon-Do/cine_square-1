@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { message } from 'antd';
-import axios from 'axios';
 import './signin.scss'
-import { useRef, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { startGetUserInfoActionCreator } from '../redux/modules/auth';
+import TokenService from '../service/TokenService';
+import { push } from 'connected-react-router';
 
 const { Kakao } = window;
 const { naver } = window;
@@ -12,14 +14,21 @@ const { naver } = window;
 export default function Signin() {
 
   const history = useHistory();
-
+  const dispatch = useDispatch();
   const [account, setAccount] = useState('')
   const passwordRef = useRef('');
 
-  // if (localStorage.getItem('token')) {
-  //   history.push('/')
-  // }
+  function click() {
+    const password = passwordRef.current.value;
+    if (account === '' || password === '' || account == null || password == null) return;
+    getUser(account, password)
+    dispatch(push('/'))
+  }
 
+  const getUser = useCallback((account, password) => {
+    dispatch(startGetUserInfoActionCreator(account, password))
+
+  }, [dispatch])
 
   function loginWithKakao() {
     Kakao.Auth.login({
@@ -55,8 +64,9 @@ export default function Signin() {
 
   useEffect(() => {
     initializeNaverLogin();
-
   }, []);
+
+
 
   return (
     <div className="signin-wrapper">
@@ -86,38 +96,6 @@ export default function Signin() {
   );
 
 
-  async function click() {
-
-    const password = passwordRef.current.value;
-
-    if (account === '' || password === '' || account == null || password == null) return;
-    try {
-      // const response = await axios.post('http://cinesquare.yahmedora.com:8080/user/signin', { account, password })
-      // const token = response.data.result.cineToken;
-      // if (token) {
-      //   localStorage.setItem('token', token)
-      //   history.push('/')
-      // }
-
-      // const token = response.data.token;
-      // 어디 저장할까?
-      // localstorage
-      // 언제까지 살아있어야 하는지
-      // localStorage.setItem('token', token);
-      // 홈으로 이동 시킨다.
-
-    } catch (error) {
-      console.log(error.response.data.error);
-      const errorCode = error.response.data.error
-      if (errorCode === 'PASSWORD_NOT_MATCH') {
-        message.error('비밀번호가 맞지 않습니다.');
-      } else if (errorCode === 'USER_NOT_EXIST') {
-        message.error('이메일이 맞지 않습니다.')
-      } else {
-        message.error(`알 수 없는 에러 ${errorCode}`)
-      }
-    }
-  }
 
   function change(e) {
     setAccount(e.target.value);
@@ -128,3 +106,39 @@ export default function Signin() {
     history.push('/signup')
   }
 }
+
+
+
+
+
+// try {
+    //   const token = await UserService.getUserInfo(account, password);
+    //   console.log(token);
+    //   if (token) {
+    //     TokenService.save(token);
+    //     history.push('/')
+    //   } else {
+    //     const resultError = await UserService.getUserInfo(account, password);
+    //     if (resultError === false) {
+    //       message.error('유저 정보가 일치하지 않습니다.');
+    //     }
+    //   }
+
+    //   // const token = response.data.token;
+    //   // 어디 저장할까?
+    //   // localstorage
+    //   // 언제까지 살아있어야 하는지
+    //   // localStorage.setItem('token', token);
+    //   // 홈으로 이동 시킨다.
+
+    // } catch (error) {
+    //   console.log(error);
+    //   // const errorCode = error.response.data.error
+    //   // if (errorCode === 'PASSWORD_NOT_MATCH') {
+    //   //   message.error('비밀번호가 맞지 않습니다.');
+    //   // } else if (errorCode === 'USER_NOT_EXIST') {
+    //   //   message.error('이메일이 맞지 않습니다.')
+    //   // } else {
+    //   //   message.error(`알 수 없는 에러 ${errorCode}`)
+    //   // }
+    // }

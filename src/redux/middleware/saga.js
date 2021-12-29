@@ -1,7 +1,8 @@
 import { all } from 'redux-saga/effects';
 import { getSearchValueSaga } from '../modules/search';
 import { getBoxOfficeListSaga } from '../modules/boxoffice';
+import { getUserInfoSaga } from '../modules/auth';
 
 export default function* rootSaga() {
-  yield all([getSearchValueSaga(), getBoxOfficeListSaga()]);
+  yield all([getSearchValueSaga(), getBoxOfficeListSaga(), getUserInfoSaga()]);
 }
