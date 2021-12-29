@@ -1,5 +1,5 @@
 import BoxOfficeService from '../../service/BoxOfficeService';
-import { put, call, takeEvery, takeLatest } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 
 const prefix = 'CINESQUARE/BOXOFFICE';
 
