@@ -1,15 +1,13 @@
-import React, { useState, useRef, useCallback } from 'react';
-import axios from 'axios';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // import SearchButton from '../SearchButton';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { startGetSearchValueActionCreator } from '../../redux/modules/search';
+import { startGetSearchListActionCreator } from '../../redux/modules/search'
 
 import './headerTemplate.scss'
-
-// const token = '';
-const token = localStorage.getItem('token');
+import TokenService from '../../service/TokenService';
 
 
 export default function HeaderTemplate() {
@@ -17,16 +15,26 @@ export default function HeaderTemplate() {
   const searchInput = useRef();
   const searchClickButton = useRef();
   const dispatch = useDispatch();
+  const keyword = useSelector(state => state.search.value)
+  const urlParameter = useSelector(state => state.router.location.pathname)
+  const token = TokenService.get('token');
 
   const getValue = useCallback(() => {
     dispatch(startGetSearchValueActionCreator(value));
+    dispatch(startGetSearchListActionCreator(value))
   }, [dispatch, value]);
+
+  useEffect(() => {
+    if (urlParameter === `/search/${keyword}`) {
+      setValue(keyword)
+    }
+  }, [urlParameter, keyword])
 
   return (
     <header className="header-container">
       <div className="header-wrapper">
         <h1 className="header" onClick={() => { dispatch(push('/')) }}>
-          <img src="./images/logo_2.png" alt="main_logo" />
+          <img src="../images/logo_2.png" alt="main_logo" />
         </h1>
         <div className="right-content">
           <div className="input-box" role="search">
@@ -81,7 +89,7 @@ export default function HeaderTemplate() {
       //   console.log(error)
       // }
       getValue();
-      dispatch(push('/search'))
+      dispatch(push(`/search/${value}`))
     }
   }
 
