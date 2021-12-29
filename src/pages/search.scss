@@ -39,6 +39,12 @@ $text-left-padding: 20px;
         // margin: 0;
         img {
           width: 100%;
+          height: 222px;
+        }
+        p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         // }
         span::before {

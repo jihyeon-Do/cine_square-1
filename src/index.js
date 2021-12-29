@@ -12,10 +12,9 @@ import create, { sagaMiddleware } from './redux/create';
 import { createBrowserHistory } from 'history';
 import rootSaga from './redux/middleware/saga';
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 // 초기화시점
 export const store = create(history);
-sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

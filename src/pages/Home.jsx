@@ -10,6 +10,7 @@ import Owlslide from '../components/Owlslide';
 import VideoFrameContainer from '../containers/VideoFrameContainer';
 import { startGetBoxOfficeListActionCreator } from '../redux/modules/boxoffice';
 import BoxOffice from '../components/BoxOffice';
+import TokenService from '../service/TokenService';
 
 
 function Home({ history }) {
@@ -17,6 +18,11 @@ function Home({ history }) {
   const dispatch = useDispatch();
   const boxOfficeList = useSelector((state) => state.boxoffice.boxOfficeList);
   const [modalId, setModalId] = useState(0);
+  const token = useSelector(state => state.auth.token);
+
+  if (token) {
+    TokenService.save(token)
+  }
 
   const show = useCallback((id) => {
     setModalId(id);
@@ -63,7 +69,8 @@ function Home({ history }) {
         {modalId > 0 && <VideoFrameContainer hide={hide} id={modalId} />}
         <section>
           <article className="rank cine-square-rank">
-            <h3>랜덤 추천 영화 순위</h3>
+            {/* <h3>랜덤 추천 영화 순위</h3> */}
+            <h3>씨네스퀘어 영화 추천</h3>
             <div className="slide-container">
               <ul>
                 <li>

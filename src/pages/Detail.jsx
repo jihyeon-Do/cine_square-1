@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import FooterTemplate from '../components/atom/FooterTemplate';
 import HeaderTemplate from '../components/atom/HeaderTemplate';
 import './detail.scss'
@@ -10,9 +10,13 @@ import { ReactComponent as Reset } from '../images/reset.svg'
 import { ReactComponent as BookmarkEmpty } from '../images/bookmark-empty.svg'
 import { ReactComponent as BookmarkFull } from '../images/bookmark-full.svg'
 
+import axios from 'axios';
+
 const MAX_SCORE = 5
 
-export default function Detail() {
+export default function Detail({ match }) {
+
+  const movieCd = match.params.movieCd; // string
 
   const commentDate = () => {
     let today = new Date();
@@ -30,10 +34,52 @@ export default function Detail() {
   const [value, setvalue] = useState('');
   const [comments, setComments] = useState([])
   const [seeMore, setSeeMore] = useState(false)
+  const [movieInfo, setMovieInfo] = useState(null);
 
   const formtag = useRef();
 
-  const handleChange = (v) => setScore(v)
+  // const handleChange = (v) => setScore(v)
+  const handleChange = (v) => {
+    if (score === 0 && displayScore === 0) return;
+    sendScore(v)
+    setScore(v)
+  }
+
+  useEffect(() => {
+    async function getMovieInfo() {
+      try {
+        const response = await axios.get(`http://cinesquare.yahmedora.com:8080/movie/movieInfo?movieCd=${movieCd}`)
+        setMovieInfo(response.data.result)
+        console.log(response.data.result)
+        // if (score === 0 && displayScore === 0) return;
+        setScore(response.data.result.grade);
+        setDisplayScore(response.data.result.grade);
+        console.log(response.data.result)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getMovieInfo();
+  }, [movieCd])
+
+  const sendScore = async function (v) {
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: 'http://cinesquare.yahmedora.com:8080/user/selectMovieGrade',
+        data: {
+          account: "123@kk.co.kr",
+          password: "test1",
+          grade: v,
+          movieCd: movieCd
+        }
+      })
+
+      console.log(response);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const calculateScore = (e) => {
     const { width, left } = e.currentTarget.getBoundingClientRect()
@@ -42,9 +88,15 @@ export default function Detail() {
     return (Math.floor(x / scale) + 1) / 2
   }
 
-  const handleMouseMove = (e) => {
+  // const handleMouseMove = (e) => {
+  //   setDisplayScore(calculateScore(e))
+  // }
+
+
+  const handleMouseMove = useCallback((e) => {
     setDisplayScore(calculateScore(e))
-  }
+  }, [])
+
   const handleBookmark = () => {
     setBookmark(!bookmark)
   }
@@ -66,46 +118,52 @@ export default function Detail() {
             <div className="poster-box-3"></div>
           </div>
         </div>
-        <section>
+        {movieInfo && <section>
           <div className="close-box" style={seeMore ? { display: 'block' } : { display: 'none' }}></div>
           <div className="movie-info2-detail" style={seeMore ? { display: 'block' } : { display: 'none' }}>
             <h3 aria-labelledby="기본정보 더 상세히 보기">기본 정보</h3>
             <dl>
               <div>
                 <dt>원제</dt>
-                <dd>싱크홀</dd>
+                <dd>{movieInfo.movieNm}</dd>
               </div>
 
               <div>
                 <dt>제작연도</dt>
-                <dd>2021</dd>
+                <dd>{movieInfo.openDt}</dd>
 
               </div>
               <div>
                 <dt>국가</dt>
-                <dd>한국</dd>
+                <dd>{movieInfo.nations}</dd>
               </div>
 
               <div>
                 <dt>장르</dt>
-                <dd>드라마/재난</dd>
+                <dd>{movieInfo.janres}</dd>
               </div>
 
               <div>
                 <dt>상영시간</dt>
-                <dd>1시간 53분</dd>
+                <dd>{movieInfo.showTm}분</dd>
               </div>
 
               <div>
                 <dt>내용</dt>
-                <dd>사.상.초.유! 도심 속 초대형 재난 발생!
+                {/* <dd>
+                  사.상.초.유! 도심 속 초대형 재난 발생!
 
                   서울 입성과 함께 내 집 마련의 꿈을 이룬 가장 `동원(김성균)`. 이사 첫날부터 프로 참견러 `만수`(차승원)와 사사건건 부딪힌다. `동원`은 자가취득을 기념하며 직장 동료들을 집들이에 초대하지만 행복한 단꿈도 잠시, 순식간에 빌라 전체가 땅 속으로 떨어지고 만다.
 
                   마주치기만 하면 투닥거리는 빌라 주민 `만수`와 `동원`.`동원`의 집들이에 왔던 `김대리`(이광수)와 인턴사원 `은주`(김혜준)까지! 지하 500m 싱크홀 속으로 떨어진 이들은 과연 무사히 빠져나갈 수 있을까?
 
                   “한 500m 정도는 떨어진 것 같아”
-                  “우리… 나갈 수 있을까요?” </dd>
+                  “우리… 나갈 수 있을까요?” 
+                  </dd> */}
+                <dd>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque amet aliquid praesentium nam unde.
+                  Illum sint, dolorum illo quia quod dolor itaque tempore error laboriosam modi repellat qui, cum facere.
+                </dd>
               </div>
             </dl>
             <button className="close-btn" onClick={() => setSeeMore(false)}>상세정보닫기</button>
@@ -113,11 +171,12 @@ export default function Detail() {
 
           <div className="movie-info">
             <div className="movie-info1">
-              <img src="../images/sinkhole_poster.jpg" alt="싱크홀포스터" />
+              <img src={`${movieInfo.mainImg}`} alt={`${movieInfo.movieNm}포스터`} />
               <div className="box2">
-                <p className="movie-title">싱크홀</p>
-                <p className="movie-sub-info">2021 <span>드라마/재난</span><span>한국</span></p>
-                <p className="movie-sub-info2"><span><FullStar1 /></span>평점 2.5</p>
+                <p className="movie-title">{movieInfo.movieNm}</p>
+                <p className="movie-sub-info">{movieInfo.openDt} <span>{movieInfo.janres}</span><span>{movieInfo.nations}</span></p>
+                <p className="movie-sub-info2"><span><FullStar1 /></span>평점 {score}</p>
+                {/* 만약 평점 {score} 부분을 실시간으로 보고 싶지 않다면, {movieInfo.grade}로 변경하면 된다. */}
                 <div className="rating">
                   <section>
                     <div
@@ -148,9 +207,9 @@ export default function Detail() {
             <div className="movie-info2">
               <h3>기본 정보</h3>
               <div className="movie-sub-info3">
-                <p>싱크홀</p>
-                <p>1시간 53분 <span>12세</span></p>
-                <p className="overflow">사.상.초.유! 도심 속 초대형 재난 발생! 서울 입성과 함께 내 집 마련의 꿈을 이룬 가장 `동원(김성균)`. 이사 첫날부터 프로 참견러 `만수`(차승원)와 사사건건 부딪힌다. `동원`은 자가취득을 기념하며 직장 동료들을 집들이에 초대하지만 행복한 단꿈도 잠시, 순식간에 빌라 전체가 땅 속으로 떨어지고 만다. 마주치기만 하면 투닥거리는 빌라 주민 `만수`와 `동원`.`동원`의 집들이에 왔던 `김대리`(이광수)와 인턴사원 `은주`(김혜준)까지! 지하 500m 싱크홀 속으로 떨어진 이들은 과연 무사히 빠져나갈 수 있을까? “한 500m 정도는 떨어진 것 같아” “우리… 나갈 수 있을까요?” </p>
+                <p>{movieInfo.movieNm}</p>
+                <p>{movieInfo.showTm}분 {/*<span>12세</span>*/}</p>
+                {/* <p className="overflow">사.상.초.유! 도심 속 초대형 재난 발생! 서울 입성과 함께 내 집 마련의 꿈을 이룬 가장 `동원(김성균)`. 이사 첫날부터 프로 참견러 `만수`(차승원)와 사사건건 부딪힌다. `동원`은 자가취득을 기념하며 직장 동료들을 집들이에 초대하지만 행복한 단꿈도 잠시, 순식간에 빌라 전체가 땅 속으로 떨어지고 만다. 마주치기만 하면 투닥거리는 빌라 주민 `만수`와 `동원`.`동원`의 집들이에 왔던 `김대리`(이광수)와 인턴사원 `은주`(김혜준)까지! 지하 500m 싱크홀 속으로 떨어진 이들은 과연 무사히 빠져나갈 수 있을까? “한 500m 정도는 떨어진 것 같아” “우리… 나갈 수 있을까요?” </p> */}
               </div>
               <button onClick={() => setSeeMore(true)}>더보기</button>
             </div>
@@ -158,16 +217,14 @@ export default function Detail() {
             <div className="movie-info3">
               <h3>출연/제작</h3>
               <ul>
-                <li>
-                  <img src="../images/director.jpg" alt="김지훈" />
-                  <p>김지훈</p>
-                  <p>감독</p>
-                </li>
-                <li>
-                  <img src="../images/Seung-won.jpg" alt="차승원" />
-                  <p>차승원</p>
-                  <p>주연 | 정만수</p>
-                </li>
+                {movieInfo.characterList.map((character) => (
+                  <li>
+                    <img src={`${character.characterImg}`} alt={`${character.realNm}`} />
+                    <p>{character.realNm}</p>
+                    <p>{character.movieRoll}</p>
+                    <p>{character.characterNm}</p>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="movie-info4">
@@ -190,7 +247,7 @@ export default function Detail() {
               <button className="add-content">더보기</button>
             </div>
           </div>
-        </section>
+        </section>}
       </main>
       <FooterTemplate />
     </>

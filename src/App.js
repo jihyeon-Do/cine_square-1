@@ -27,10 +27,10 @@ function App({ history }) {
           <Route path="/signup" component={Signup} />
           <Route path="/complete" component={Complete} />
           <Route path="/profile" component={Profile} />
-          <Route path="/detail" component={Detail} />
+          <Route path="/detail/:movieCd" component={Detail} />
           <Route path="/evaluate" component={Evaluate} />
           <Route path="/mybooks" component={MyBooks} />
-          <Route path="/search" component={Search} />
+          <Route path="/search/:keyword" component={Search} />
           <Route path="/" exact component={Home} />
           <Route component={NotFound} />
         </Switch>
