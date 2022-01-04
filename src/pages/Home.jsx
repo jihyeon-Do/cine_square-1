@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import './home.scss'
 
-import HeaderTemplate from '../components/atom/HeaderTemplate';
-import FooterTemplate from '../components/atom/FooterTemplate';
+import HeaderTemplate from '../components/HeaderTemplate';
+import FooterTemplate from '../components/FooterTemplate';
 import VideoFrame from '../components/VideoFrame';
 import Owlslide from '../components/Owlslide';
 import VideoFrameContainer from '../containers/VideoFrameContainer';
 import { startGetBoxOfficeListActionCreator } from '../redux/modules/boxoffice';
 import BoxOffice from '../components/BoxOffice';
 import TokenService from '../service/TokenService';
+import AccountService from '../service/AccountService';
 
 
 function Home({ history }) {
@@ -19,9 +20,11 @@ function Home({ history }) {
   const boxOfficeList = useSelector((state) => state.boxoffice.boxOfficeList);
   const [modalId, setModalId] = useState(0);
   const token = useSelector(state => state.auth.token);
+  const account = useSelector(state => state.auth.account);
 
-  if (token) {
-    TokenService.save(token)
+  if (token && account) {
+    TokenService.save(token);
+    AccountService.save(account);
   }
 
   const show = useCallback((id) => {

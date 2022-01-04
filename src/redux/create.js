@@ -6,6 +6,7 @@ import { routerMiddleware } from 'connected-react-router';
 import rootSaga from './middleware/saga';
 import TokenService from '../service/TokenService';
 import UserService from '../service/UserService';
+import AccountService from '../service/AccountService';
 // const store = createStore(rootReducer);
 
 // export const history = createBrowserHistory();
@@ -18,6 +19,7 @@ export default function create(history) {
     {
       auth: {
         token: TokenService.get(),
+        account: AccountService.get(),
         loading: false,
         error: null,
       },

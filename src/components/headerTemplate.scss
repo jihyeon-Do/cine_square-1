@@ -15,7 +15,7 @@
       cursor: pointer;
     }
     .right-content {
-      width: 50%;
+      width: 55%;
       display: flex;
       justify-content: space-between;
       padding: 10px;
@@ -35,7 +35,7 @@
         .search-button {
           width: 35px;
           height: 32px;
-          background: url(../../images/search.png) no-repeat 0 0;
+          background: url(../images/search.png) no-repeat 0 0;
           background-size: contain;
           text-indent: -9999px;
           overflow: hidden;
@@ -67,14 +67,18 @@
       }
       .my-profile-btn {
         line-height: 32px;
-        a {
+        a,
+        p {
           display: inline-block;
-          margin-left: 40px;
+          margin-left: 35px;
           color: #ffffff;
           font-size: 0.8rem;
         }
         a:hover {
           color: #ffffff;
+        }
+        p {
+          cursor: pointer;
         }
       }
     }

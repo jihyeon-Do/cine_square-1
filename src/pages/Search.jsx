@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import './search.scss';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import HeaderTemplate from '../components/atom/HeaderTemplate';
-import FooterTemplate from '../components/atom/FooterTemplate';
+import HeaderTemplate from '../components/HeaderTemplate';
+import FooterTemplate from '../components/FooterTemplate';
 import { startGetSearchValueActionCreator } from '../redux/modules/search';
 import { startGetSearchListActionCreator } from '../redux/modules/search'
 
