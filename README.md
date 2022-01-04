@@ -3,7 +3,7 @@
 ## 시연 동영상
 
 ![cinesquare-main](./public/images/cine-square%20main.PNG)
-👉 video : [cine-square](https://www.loom.com/share/b24a5153e7e44361bc68dbb16b5bb1b5)
+👉 video : [cine-square](https://youtu.be/MJCNx3HAPoI)
 
 ---
 
