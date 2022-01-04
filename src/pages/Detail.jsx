@@ -1,6 +1,9 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import FooterTemplate from '../components/atom/FooterTemplate';
-import HeaderTemplate from '../components/atom/HeaderTemplate';
+import { useSelector, useDispatch } from 'react-redux';
+import { push } from 'connected-react-router';
+
+import FooterTemplate from '../components/FooterTemplate';
+import HeaderTemplate from '../components/HeaderTemplate';
 import './detail.scss'
 import { ReactComponent as EmptyStar } from '../images/star-empty1.svg'
 import { ReactComponent as HalfStar } from '../images/star-half1.svg'
@@ -36,13 +39,26 @@ export default function Detail({ match }) {
   const [seeMore, setSeeMore] = useState(false)
   const [movieInfo, setMovieInfo] = useState(null);
 
-  const formtag = useRef();
+  const token = useSelector(state => state.auth.token);
+  const account = useSelector(state => state.auth.account);
 
+  const formtag = useRef();
+  const dispatch = useDispatch();
   // const handleChange = (v) => setScore(v)
+
+  const requiredLogin = () => {
+    alert('로그인 후 이용해 주세요');
+    dispatch(push('/signin'))
+  }
+
   const handleChange = (v) => {
-    if (score === 0 && displayScore === 0) return;
-    sendScore(v)
-    setScore(v)
+    if (token === null) {
+      requiredLogin()
+    } else {
+      if (score === 0 && displayScore === 0) return;
+      sendScore(v)
+      setScore(v)
+    }
   }
 
   useEffect(() => {
@@ -63,12 +79,13 @@ export default function Detail({ match }) {
   }, [movieCd])
 
   const sendScore = async function (v) {
+    if (account === null) return;
     try {
       const response = await axios({
         method: 'POST',
         url: 'http://cinesquare.yahmedora.com:8080/user/selectMovieGrade',
         data: {
-          account: "123@kk.co.kr",
+          account: account,
           password: "test1",
           grade: v,
           movieCd: movieCd
@@ -98,7 +115,11 @@ export default function Detail({ match }) {
   }, [])
 
   const handleBookmark = () => {
-    setBookmark(!bookmark)
+    if (token === null) {
+      requiredLogin()
+    } else {
+      setBookmark(!bookmark)
+    }
   }
 
   const maxId = () => {
@@ -264,8 +285,12 @@ export default function Detail({ match }) {
   }
 
   function handleAddComment(e) {
-    setComments([...comments, { id: maxId(), nickName: '고정', comment: value, dates: commentDate() }])
-    setvalue('')
+    if (token === null) {
+      requiredLogin()
+    } else {
+      setComments([...comments, { id: maxId(), nickName: '고정', comment: value, dates: commentDate() }])
+      setvalue('')
+    }
   }
 }
 

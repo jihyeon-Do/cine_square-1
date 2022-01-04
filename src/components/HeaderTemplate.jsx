@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 // import SearchButton from '../SearchButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
-import { startGetSearchValueActionCreator } from '../../redux/modules/search';
-import { startGetSearchListActionCreator } from '../../redux/modules/search'
+import { startGetSearchValueActionCreator } from '../redux/modules/search';
+import { startGetSearchListActionCreator } from '../redux/modules/search'
 
 import './headerTemplate.scss'
-import TokenService from '../../service/TokenService';
+import TokenService from '../service/TokenService';
+import AccountService from '../service/AccountService';
 
 
 export default function HeaderTemplate() {
@@ -57,6 +58,7 @@ export default function HeaderTemplate() {
               <div>
                 <Link to="/evaluate">평가하기</Link>
                 <Link to="/profile">내정보</Link>
+                {/* <p onClick={logOut}>로그아웃</p> */}
               </div>
 
             )}
@@ -73,6 +75,15 @@ export default function HeaderTemplate() {
     </header>
 
   )
+
+  // function logOut() {
+  //   TokenService.delete();
+  //   AccountService.delete();
+
+  //   if (!token) {
+  //     dispatch(push('/'))
+  //   }
+  // }
 
   function search(e) {
     setValue(e.target.value);

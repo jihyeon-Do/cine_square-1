@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import HeaderTemplate from '../components/atom/HeaderTemplate'
-import FooterTemplate from '../components/atom/FooterTemplate';
+import HeaderTemplate from '../components/HeaderTemplate'
+import FooterTemplate from '../components/FooterTemplate';
 import './evaluate.scss';
 import Rating from '../components/Rating';
 

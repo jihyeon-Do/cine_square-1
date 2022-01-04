@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import FooterTemplate from '../components/atom/FooterTemplate';
-import HeaderTemplate from '../components/atom/HeaderTemplate'
+import FooterTemplate from '../components/FooterTemplate';
+import HeaderTemplate from '../components/HeaderTemplate'
 import '../pages/profile.scss';
 import { Chart, registerables } from 'chart.js';
 import { Link, NavLink } from 'react-router-dom';
