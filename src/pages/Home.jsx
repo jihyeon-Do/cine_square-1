@@ -54,6 +54,22 @@ function Home({ history }) {
   //   fetchData();
   // }, [setBoxoffice])
 
+  // async function getUserInfo() {
+  //   try {
+  //     const response = await axios({
+  //       method: 'POST',
+  //       url: 'http://cinesquare.yahmedora.com:8080/user/userMovieReview',
+  //       data: {
+  //         account: account
+  //       }
+  //     })
+  //     console.log(response)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+  // getUserInfo();
+
   const getBoxOfficeList = useCallback(() => {
     dispatch(startGetBoxOfficeListActionCreator());
   }, [dispatch]);
