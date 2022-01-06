@@ -22,7 +22,7 @@ export default function Signup() {
   // const [phoneNumber, setPhoneNumber] = useState(false)
 
   const passwordRef = useRef('');
-  const nameRef = useRef('')
+  const nameRef = useRef('');
   // const samePasswordRef = useRef('');
   // const phoneNumberRef = useRef('')
 
@@ -37,18 +37,18 @@ export default function Signup() {
     Kakao.Auth.login({
       success: function (authObj) {
         const kakaoToken = Kakao.Auth.getAccessToken();
-        console.log(kakaoToken)
+        console.log(kakaoToken);
         localStorage.removeItem('kakao_7b617f923188c842b0efaaecb0e0c1ad');
         Kakao.API.request({
           url: '/v2/user/me',
           success: res => {
-            console.log(res)
+            console.log(res);
             history.push('/complete')
           }
         })
       },
       fail: function (err) {
-        alert(JSON.stringify(err))
+        alert(JSON.stringify(err));
       },
     })
 
@@ -145,10 +145,10 @@ export default function Signup() {
       <SignupComplete />
       <ConfirmModal />
     </main>
-  )
+  );
 
   function change(e) {
-    setAccount(e.target.value)
+    setAccount(e.target.value);
   }
 
   // function isAccount() {

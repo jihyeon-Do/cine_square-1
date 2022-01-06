@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { startGetSearchValueActionCreator } from '../redux/modules/search';
-import { startGetSearchListActionCreator } from '../redux/modules/search'
+import { startGetSearchListActionCreator } from '../redux/modules/search';
 
-import './headerTemplate.scss'
+import './headerTemplate.scss';
 import TokenService from '../service/TokenService';
 import AccountService from '../service/AccountService';
 
@@ -16,8 +16,8 @@ export default function HeaderTemplate() {
   const searchInput = useRef();
   const searchClickButton = useRef();
   const dispatch = useDispatch();
-  const keyword = useSelector(state => state.search.value)
-  const urlParameter = useSelector(state => state.router.location.pathname)
+  const keyword = useSelector(state => state.search.value);
+  const urlParameter = useSelector(state => state.router.location.pathname);
   const token = TokenService.get('token');
 
   const getValue = useCallback(() => {
@@ -27,7 +27,7 @@ export default function HeaderTemplate() {
 
   useEffect(() => {
     if (urlParameter === `/search/${keyword}`) {
-      setValue(keyword)
+      setValue(keyword);
     }
   }, [urlParameter, keyword])
 
@@ -100,7 +100,7 @@ export default function HeaderTemplate() {
       //   console.log(error)
       // }
       getValue();
-      dispatch(push(`/search/${value}`))
+      dispatch(push(`/search/${value}`));
     }
   }
 

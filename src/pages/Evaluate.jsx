@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HeaderTemplate from '../components/HeaderTemplate'
+import HeaderTemplate from '../components/HeaderTemplate';
 import FooterTemplate from '../components/FooterTemplate';
 import './evaluate.scss';
 import Rating from '../components/Rating';
@@ -67,4 +67,4 @@ function Evaluate() {
 
 
 
-export default Evaluate
+export default Evaluate;

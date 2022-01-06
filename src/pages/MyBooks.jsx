@@ -47,7 +47,7 @@ const evaluated = [
     title: '기적',
     rating: 5
   }
-]
+];
 
 const collection = [
   {
@@ -55,10 +55,10 @@ const collection = [
     poster: '../images/Miracle_poster.jpg',
     title: '기적',
   }
-]
+];
 
 function MyBooks() {
-  const [tabNumber, setTabNumber] = useState(1)
+  const [tabNumber, setTabNumber] = useState(1);
 
   return (
     <>
@@ -101,7 +101,7 @@ function MyBooks() {
       </main>
       <FooterTemplate />
     </>
-  )
+  );
 }
 
-export default MyBooks
+export default MyBooks;

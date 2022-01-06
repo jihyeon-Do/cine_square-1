@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import './home.scss'
+import './home.scss';
 
 import HeaderTemplate from '../components/HeaderTemplate';
 import FooterTemplate from '../components/FooterTemplate';
@@ -39,7 +39,7 @@ function Home({ history }) {
   // }
 
   function goLogin() {
-    history.push('/signin')
+    history.push('/signin');
   }
 
   // useEffect(() => {
@@ -54,21 +54,6 @@ function Home({ history }) {
   //   fetchData();
   // }, [setBoxoffice])
 
-  // async function getUserInfo() {
-  //   try {
-  //     const response = await axios({
-  //       method: 'POST',
-  //       url: 'http://cinesquare.yahmedora.com:8080/user/userMovieReview',
-  //       data: {
-  //         account: account
-  //       }
-  //     })
-  //     console.log(response)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-  // getUserInfo();
 
   const getBoxOfficeList = useCallback(() => {
     dispatch(startGetBoxOfficeListActionCreator());
@@ -323,4 +308,4 @@ function Home({ history }) {
   );
 }
 
-export default React.memo(Home)
+export default React.memo(Home);

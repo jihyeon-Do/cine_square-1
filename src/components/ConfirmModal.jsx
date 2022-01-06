@@ -4,7 +4,7 @@ import AuthAlert from './AuthAlert';
 function ConfirmModal() {
   // const [result, setResult] = useState(true);
   const [result, setResult] = useState(0);
-  const [notice, setNotice] = useState('이미 사용중인 이메일입니다')
+  const [notice, setNotice] = useState('이미 사용중인 이메일입니다');
 
   // useEffect(() => {
 
