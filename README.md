@@ -75,6 +75,13 @@ $ npm start
 
 ---
 
+**로그인**
+<br>
+id : 123@kk.co.kr<br>
+password : test1
+
+---
+
 ## License
 
 - **MIT License**
