@@ -4,18 +4,18 @@ import { push } from 'connected-react-router';
 
 import FooterTemplate from '../components/FooterTemplate';
 import HeaderTemplate from '../components/HeaderTemplate';
-import './detail.scss'
-import { ReactComponent as EmptyStar } from '../images/star-empty1.svg'
-import { ReactComponent as HalfStar } from '../images/star-half1.svg'
-import { ReactComponent as FullStar } from '../images/star-full1.svg'
-import { ReactComponent as FullStar1 } from '../images/star-full.svg'
-import { ReactComponent as Reset } from '../images/reset.svg'
-import { ReactComponent as BookmarkEmpty } from '../images/bookmark-empty.svg'
-import { ReactComponent as BookmarkFull } from '../images/bookmark-full.svg'
+import './detail.scss';
+import { ReactComponent as EmptyStar } from '../images/star-empty1.svg';
+import { ReactComponent as HalfStar } from '../images/star-half1.svg';
+import { ReactComponent as FullStar } from '../images/star-full1.svg';
+import { ReactComponent as FullStar1 } from '../images/star-full.svg';
+import { ReactComponent as Reset } from '../images/reset.svg';
+import { ReactComponent as BookmarkEmpty } from '../images/bookmark-empty.svg';
+import { ReactComponent as BookmarkFull } from '../images/bookmark-full.svg';
 
 import axios from 'axios';
 
-const MAX_SCORE = 5
+const MAX_SCORE = 5;
 
 export default function Detail({ match }) {
 
@@ -28,15 +28,15 @@ export default function Detail({ match }) {
     let date = today.getDate();
 
     let todayDate = year + '.' + month + '.' + date;
-    return todayDate
+    return todayDate;
   }
 
   const [score, setScore] = useState(0);
   const [displayScore, setDisplayScore] = useState(score);
   const [bookmark, setBookmark] = useState(false);
   const [value, setvalue] = useState('');
-  const [comments, setComments] = useState([])
-  const [seeMore, setSeeMore] = useState(false)
+  const [comments, setComments] = useState([]);
+  const [seeMore, setSeeMore] = useState(false);
   const [movieInfo, setMovieInfo] = useState(null);
 
   const token = useSelector(state => state.auth.token);
@@ -48,31 +48,31 @@ export default function Detail({ match }) {
 
   const requiredLogin = () => {
     alert('로그인 후 이용해 주세요');
-    dispatch(push('/signin'))
+    dispatch(push('/signin'));
   }
 
   const handleChange = (v) => {
     if (token === null) {
-      requiredLogin()
+      requiredLogin();
     } else {
       if (score === 0 && displayScore === 0) return;
-      sendScore(v)
-      setScore(v)
+      sendScore(v);
+      setScore(v);
     }
   }
 
   useEffect(() => {
     async function getMovieInfo() {
       try {
-        const response = await axios.get(`http://cinesquare.yahmedora.com:8080/movie/movieInfo?movieCd=${movieCd}`)
-        setMovieInfo(response.data.result)
-        console.log(response.data.result)
+        const response = await axios.get(`http://cinesquare.yahmedora.com:8080/movie/movieInfo?movieCd=${movieCd}`);
+        setMovieInfo(response.data.result);
+        console.log(response.data.result);
         // if (score === 0 && displayScore === 0) return;
         setScore(response.data.result.grade);
         setDisplayScore(response.data.result.grade);
-        console.log(response.data.result)
+        console.log(response.data.result);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
     getMovieInfo();
@@ -94,15 +94,15 @@ export default function Detail({ match }) {
 
       console.log(response);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
   const calculateScore = (e) => {
-    const { width, left } = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - left
-    const scale = width / MAX_SCORE / 2
-    return (Math.floor(x / scale) + 1) / 2
+    const { width, left } = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - left;
+    const scale = width / MAX_SCORE / 2;
+    return (Math.floor(x / scale) + 1) / 2;
   }
 
   // const handleMouseMove = (e) => {
@@ -111,14 +111,14 @@ export default function Detail({ match }) {
 
 
   const handleMouseMove = useCallback((e) => {
-    setDisplayScore(calculateScore(e))
+    setDisplayScore(calculateScore(e));
   }, [])
 
   const handleBookmark = () => {
     if (token === null) {
-      requiredLogin()
+      requiredLogin();
     } else {
-      setBookmark(!bookmark)
+      setBookmark(!bookmark);
     }
   }
 
@@ -272,7 +272,7 @@ export default function Detail({ match }) {
       </main>
       <FooterTemplate />
     </>
-  )
+  );
 
   function addComment(e) {
     setvalue(e.target.value);
@@ -286,10 +286,10 @@ export default function Detail({ match }) {
 
   function handleAddComment(e) {
     if (token === null) {
-      requiredLogin()
+      requiredLogin();
     } else {
-      setComments([...comments, { id: maxId(), nickName: '고정', comment: value, dates: commentDate() }])
-      setvalue('')
+      setComments([...comments, { id: maxId(), nickName: '고정', comment: value, dates: commentDate() }]);
+      setvalue('');
     }
   }
 }
@@ -297,19 +297,19 @@ export default function Detail({ match }) {
 const Star = ({ score, i }) => {
   if (score > i) {
     if (score - i === 0.5) {
-      return <HalfStar />
+      return <HalfStar />;
     } else {
-      return <FullStar />
+      return <FullStar />;
     }
   } else {
-    return <EmptyStar />
+    return <EmptyStar />;
   }
 }
 
 const Bookmark = ({ bookmark }) => {
   if (bookmark) {
-    return <BookmarkFull />
+    return <BookmarkFull />;
   } else {
-    return <BookmarkEmpty />
+    return <BookmarkEmpty />;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { message } from 'antd';
-import './signin.scss'
+import './signin.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { startGetUserInfoActionCreator } from '../redux/modules/auth';
@@ -15,18 +15,18 @@ export default function Signin() {
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const [account, setAccount] = useState('')
+  const [account, setAccount] = useState('');
   const passwordRef = useRef('');
 
   function click() {
     const password = passwordRef.current.value;
     if (account === '' || password === '' || account == null || password == null) return;
-    getUser(account, password)
-    dispatch(push('/'))
+    getUser(account, password);
+    dispatch(push('/'));
   }
 
   const getUser = useCallback((account, password) => {
-    dispatch(startGetUserInfoActionCreator(account, password))
+    dispatch(startGetUserInfoActionCreator(account, password));
 
   }, [dispatch])
 
@@ -34,19 +34,19 @@ export default function Signin() {
     Kakao.Auth.login({
       success: function (authObj) {
         const kakaoToken = Kakao.Auth.getAccessToken();
-        console.log(kakaoToken)
-        console.log(authObj)
+        console.log(kakaoToken);
+        console.log(authObj);
         localStorage.removeItem('kakao_7b617f923188c842b0efaaecb0e0c1ad');
         Kakao.API.request({
           url: '/v2/user/me',
           success: res => {
-            console.log(res)
-            history.push('/complete')
+            console.log(res);
+            history.push('/complete');
           }
         })
       },
       fail: function (err) {
-        alert(JSON.stringify(err))
+        alert(JSON.stringify(err));
       },
     })
 
@@ -103,7 +103,7 @@ export default function Signin() {
 
 
   function goSignup() {
-    history.push('/signup')
+    history.push('/signup');
   }
 }
 

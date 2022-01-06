@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { ReactComponent as EmptyStar } from '../images/star-empty1.svg'
-import { ReactComponent as HalfStar } from '../images/star-half1.svg'
-import { ReactComponent as FullStar } from '../images/star-full1.svg'
-import { ReactComponent as Reset } from '../images/reset.svg'
+import { ReactComponent as EmptyStar } from '../images/star-empty1.svg';
+import { ReactComponent as HalfStar } from '../images/star-half1.svg';
+import { ReactComponent as FullStar } from '../images/star-full1.svg';
+import { ReactComponent as Reset } from '../images/reset.svg';
 
-const MAX_SCORE = 5
+const MAX_SCORE = 5;
 
 
 function Rating() {
@@ -12,17 +12,17 @@ function Rating() {
   const [score, setScore] = useState(0);
 
   const [displayScore, setDisplayScore] = useState(score);
-  const handleChange = (v) => setScore(v)
+  const handleChange = (v) => setScore(v);
 
   const calculateScore = (e) => {
-    const { width, left } = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - left
-    const scale = width / MAX_SCORE / 2
-    return (Math.floor(x / scale) + 1) / 2
+    const { width, left } = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - left;
+    const scale = width / MAX_SCORE / 2;
+    return (Math.floor(x / scale) + 1) / 2;
   }
 
   const handleMouseMove = (e) => {
-    setDisplayScore(calculateScore(e))
+    setDisplayScore(calculateScore(e));
   }
   return (
     <div className="rating">
@@ -46,7 +46,7 @@ function Rating() {
         ></Reset>
       </section>
     </div>
-  )
+  );
 }
 
 export default Rating
@@ -54,11 +54,11 @@ export default Rating
 const Star = ({ score, i }) => {
   if (score > i) {
     if (score - i === 0.5) {
-      return <HalfStar />
+      return <HalfStar />;
     } else {
-      return <FullStar />
+      return <FullStar />;
     }
   } else {
-    return <EmptyStar />
+    return <EmptyStar />;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 
-let slideIndex = 0
+let slideIndex = 0;
 
 
 function BoxOffice({ boxOfficeList }) {
@@ -30,21 +30,22 @@ function BoxOffice({ boxOfficeList }) {
       <button type="button" onClick={slidePrev} ref={prevRef} className={`prev-btn`}><img src="../images/prev.png" alt="prev" /></button>
       <button type="button" onClick={slideNext} ref={nextRef} className={`next-btn`}><img src="../images/next.png" alt="next" /></button>
     </>
-  )
+  );
+
   function slidePrev() {
     if (slideIndex === 0) return;
     slideIndex -= 1;
-    slideWrap.current.style.transform = `translate(calc(-100%/2 * ${slideIndex}))`
-    prevRef.current.style.display = 'none'
-    nextRef.current.style.display = 'block'
+    slideWrap.current.style.transform = `translate(calc(-100%/2 * ${slideIndex}))`;
+    prevRef.current.style.display = 'none';
+    nextRef.current.style.display = 'block';
   }
 
   function slideNext() {
     if (slideIndex === 1) return;
     slideIndex += 1;
-    slideWrap.current.style.transform = `translate(calc(-100%/2 * ${slideIndex}))`
-    nextRef.current.style.display = 'none'
-    prevRef.current.style.display = 'block'
+    slideWrap.current.style.transform = `translate(calc(-100%/2 * ${slideIndex}))`;
+    nextRef.current.style.display = 'none';
+    prevRef.current.style.display = 'block';
   }
 
 }

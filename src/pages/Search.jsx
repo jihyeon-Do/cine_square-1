@@ -16,7 +16,7 @@ export default function Search({ match }) {
   // 새로고침시 재검색
   useEffect(() => {
     dispatch(startGetSearchValueActionCreator(keyword));
-    dispatch(startGetSearchListActionCreator(keyword))
+    dispatch(startGetSearchListActionCreator(keyword));
   }, [dispatch, keyword]);
 
   // useEffect(() => {

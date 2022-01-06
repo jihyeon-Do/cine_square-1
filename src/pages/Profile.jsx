@@ -9,8 +9,8 @@ import axios from 'axios';
 
 export default function Profile() {
 
-  const [imgUrl, setImgUrl] = useState(null)
-  const imageRef = useRef('')
+  const [imgUrl, setImgUrl] = useState(null);
+  const imageRef = useRef('');
   const canvasDom = useRef(null);
 
   const cineToken = localStorage.getItem('token');
@@ -34,7 +34,7 @@ export default function Profile() {
       },
     });
     return () => {
-      myChart.destroy()
+      myChart.destroy();
     }
   }, []);
 
@@ -44,9 +44,9 @@ export default function Profile() {
     // const formData = new FormData();
     // formData.append({ [e.target.name]: e.target.value })
     // formData.append('file', e.target.files[0]);
-    const fileUrl = e.target.files[0]
+    const fileUrl = e.target.files[0];
     const objectURL = URL.createObjectURL(fileUrl);
-    setImgUrl(objectURL)
+    setImgUrl(objectURL);
   }
 
   // async function userInfoFunc () {
@@ -177,5 +177,5 @@ export default function Profile() {
       </main>
       <FooterTemplate />
     </>
-  )
+  );
 }
