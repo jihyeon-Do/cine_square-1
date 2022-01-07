@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import FooterTemplate from '../components/FooterTemplate';
 import HeaderTemplate from '../components/HeaderTemplate'
 import '../pages/profile.scss';
@@ -13,7 +14,9 @@ export default function Profile() {
   const imageRef = useRef('');
   const canvasDom = useRef(null);
 
-  const cineToken = localStorage.getItem('token');
+  // const cineToken = localStorage.getItem('token');
+  // const token = useSelector(state => state.auth.token);
+
 
   useEffect(() => {
     const ctx = canvasDom.current.getContext('2d');
