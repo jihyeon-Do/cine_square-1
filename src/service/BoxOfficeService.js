@@ -1,6 +1,11 @@
 import axios from 'axios';
+import APIService from './APIService';
 
-const BOXOFFICE_URL = 'http://cinesquare.yahmedora.com:8080/movie/boxoffice';
+const AWSAPI = APIService.AWSAPI;
+const LOCALAPI = APIService.LOCALAPI;
+
+const BOXOFFICE_URL = `${AWSAPI}/movie/boxoffice`;
+// const BOXOFFICE_URL = `${LOCALAPI}/movie/boxoffice`;
 
 export default class BoxOfficeService {
   static async getBoxOfficeList() {

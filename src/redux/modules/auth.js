@@ -25,7 +25,7 @@ const loginSuccess = (token, account, userName) => ({
   type: LOGIN_SUCCESS,
   token,
   account,
-  // userName,
+  userName,
 });
 
 const loginFail = (error) => ({
@@ -53,7 +53,7 @@ const loginFail = (error) => ({
 const initialState = {
   token: null,
   account: null,
-  // userName: null,
+  userName: null,
   loading: false,
   error: null,
 };
@@ -62,7 +62,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   const token = action.token;
   const account = action.account;
-  // const userName = action.userName;
+  const userName = action.userName;
   switch (action.type) {
     case LOGIN_START:
       return {
@@ -75,7 +75,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         token: token,
         account: account,
-        // userName: userName,
+        userName: userName,
         loading: false,
         error: null,
       };
@@ -144,7 +144,7 @@ function* startGetUserInfoSaga(action) {
     console.log(user);
     const { cineToken, account, userName } = user;
     console.log(cineToken, account, userName);
-    yield put(loginSuccess(cineToken, account));
+    yield put(loginSuccess(cineToken, account, userName));
   } catch (error) {
     console.log(error);
     yield put(loginFail(error));
