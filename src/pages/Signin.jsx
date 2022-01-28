@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { message } from 'antd';
 import './signin.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { startGetUserInfoActionCreator } from '../redux/modules/auth';
 import TokenService from '../service/TokenService';
@@ -81,7 +81,7 @@ export default function Signin() {
             <input type="text" value={account} onChange={change} placeholder="이메일주소" aria-label="이메일" />
             <input type="password" ref={passwordRef} placeholder="비밀번호" aria-label="비밀번호" />
             <button className="login-btn" onClick={click} type="button">로그인</button>
-            <button type="button" className="signup-btn" onClick={goSignup}>회원가입</button>
+            <button type="button" className="signup-btn" onClick={goSignup} disabled>회원가입</button>
             <div className="social-btn">
               <p>소셜로그인</p>
               <ul>
@@ -103,7 +103,8 @@ export default function Signin() {
 
 
   function goSignup() {
-    history.push('/signup');
+    // dispatch(push('/signup'));
+    dispatch(push('/'));
   }
 }
 

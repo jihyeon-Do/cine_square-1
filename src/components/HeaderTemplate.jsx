@@ -56,16 +56,17 @@ export default function HeaderTemplate() {
           <div className="my-profile-btn">
             {token && (
               <div>
-                <Link to="/evaluate">평가하기</Link>
+                {/* <Link to="/evaluate">평가하기</Link> */}
                 <Link to="/profile">내정보</Link>
-                {/* <p onClick={logOut}>로그아웃</p> */}
+                <p onClick={logOut}>로그아웃</p>
               </div>
 
             )}
             {!token && (
               <div>
                 <Link to="/signin">로그인</Link>
-                <Link to="/signup">회원가입</Link>
+                <Link to="/" disabled>회원가입</Link>
+                {/* <Link to="/signup">회원가입</Link> */}
               </div>
             )
             }
@@ -76,14 +77,14 @@ export default function HeaderTemplate() {
 
   )
 
-  // function logOut() {
-  //   TokenService.delete();
-  //   AccountService.delete();
+  function logOut() {
+    TokenService.delete();
+    AccountService.delete();
 
-  //   if (!token) {
-  //     dispatch(push('/'))
-  //   }
-  // }
+    if (!token) {
+      dispatch(push('/'))
+    }
+  }
 
   function search(e) {
     setValue(e.target.value);

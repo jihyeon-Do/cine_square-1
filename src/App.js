@@ -28,7 +28,7 @@ function App({ history }) {
           <Route path="/complete" component={Complete} />
           <Route path="/profile" component={Profile} />
           <Route path="/detail/:movieCd" component={Detail} />
-          <Route path="/evaluate" component={Evaluate} />
+          {/* <Route path="/evaluate" component={Evaluate} /> */}
           <Route path="/mybooks" component={MyBooks} />
           <Route path="/search/:keyword" component={Search} />
           <Route path="/" exact component={Home} />

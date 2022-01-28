@@ -15,6 +15,11 @@ import { ReactComponent as BookmarkFull } from '../images/bookmark-full.svg';
 
 import axios from 'axios';
 
+import APIService from '../service/APIService';
+
+const AWSAPI = APIService.AWSAPI;
+const LOCALAPI = APIService.LOCALAPI;
+
 const MAX_SCORE = 5;
 
 export default function Detail({ match }) {
@@ -64,7 +69,8 @@ export default function Detail({ match }) {
   useEffect(() => {
     async function getMovieInfo() {
       try {
-        const response = await axios.get(`http://cinesquare.yahmedora.com:8080/movie/movieInfo?movieCd=${movieCd}`);
+        const response = await axios.get(`${AWSAPI}/movie/movieInfo?movieCd=${movieCd}`);
+        // const response = await axios.get(`${LOCALAPI}/movie/movieInfo?movieCd=${movieCd}`);
         setMovieInfo(response.data.result);
         console.log(response.data.result);
         // if (score === 0 && displayScore === 0) return;
@@ -83,10 +89,10 @@ export default function Detail({ match }) {
     try {
       const response = await axios({
         method: 'POST',
-        url: 'http://cinesquare.yahmedora.com:8080/user/selectMovieGrade',
+        url: `${AWSAPI}/user/selectMovieGrade`,
+        // url: `${LOCALAPI}/user/selectMovieGrade`,
         data: {
-          account: account,
-          password: "test1",
+          cineToken: token,
           grade: v,
           movieCd: movieCd
         }

@@ -1,9 +1,14 @@
 import axios from 'axios';
+import APIService from '../service/APIService';
+
+const AWSAPI = APIService.AWSAPI;
+const LOCALAPI = APIService.LOCALAPI;
 
 export default class UserService {
   static async getUserInfo(account, password) {
     const response = await axios.post(
-      'http://cinesquare.yahmedora.com:8080/user/signin',
+      `${AWSAPI}/user/signin`,
+      // `${LOCALAPI}/user/signin`,
       { account, password },
     );
     console.log(response);

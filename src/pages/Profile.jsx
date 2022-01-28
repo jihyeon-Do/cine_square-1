@@ -14,6 +14,8 @@ export default function Profile() {
   const imageRef = useRef('');
   const canvasDom = useRef(null);
 
+  const account = useSelector(state => state.auth.account);
+  const userName = useSelector(state => state.auth.userName);
   // const cineToken = localStorage.getItem('token');
   // const token = useSelector(state => state.auth.token);
 
@@ -87,13 +89,13 @@ export default function Profile() {
               <form>
                 <div className="profile-name user-profile">
                   <label htmlFor="user_name">이름</label>
-                  <input type="text" id="user_name" placeholder={``} />
+                  <input type="text" id="user_name" placeholder={userName} disabled />
                 </div>
                 <div className="profile-email user-profile">
                   <label htmlFor="user_email">이메일</label>
-                  <input type="text" id="user_email" placeholder={``} />
+                  <input type="text" id="user_email" placeholder={account} disabled />
                 </div>
-                <button className="modify">수정하기</button>
+                {/* <button className="modify">수정하기</button> */}
               </form>
             </div>
           </div>
