@@ -9,7 +9,6 @@
   }
   .profile-info {
     background-color: #121212;
-    box-shadow: 0px 4px 8px -4px #3b3b3b;
     & > div {
       display: flex;
       width: 980px;
@@ -178,13 +177,22 @@
             width: calc(100% / 5 - 30px);
             border-radius: 5px;
             border: 1px solid rgb(226, 226, 226);
+            p {
+              padding: 10px;
+              a {
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            }
             img {
               width: 100%;
               border-radius: 5px;
             }
           }
         }
-        a {
+        .add {
           position: absolute;
           top: 25px;
           right: 0;

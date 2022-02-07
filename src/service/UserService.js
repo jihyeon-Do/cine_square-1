@@ -1,5 +1,6 @@
 import axios from 'axios';
 import APIService from '../service/APIService';
+import { message } from 'antd';
 
 const AWSAPI = APIService.AWSAPI;
 const LOCALAPI = APIService.LOCALAPI;
@@ -13,8 +14,10 @@ export default class UserService {
     );
     console.log(response);
     if (response.data.result === null) {
+      message.error('이메일 또는 비밀번호가 맞지 않습니다.');
       return false;
+    } else {
+      return response.data.result;
     }
-    return response.data.result;
   }
 }

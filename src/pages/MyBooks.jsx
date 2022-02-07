@@ -1,53 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
 import HeaderTemplate from '../components/HeaderTemplate';
 import FooterTemplate from '../components/FooterTemplate';
 import './mybooks.scss';
 import { ReactComponent as FullStar1 } from '../images/star-full.svg';
-
-const evaluated = [
-  {
-    id: 1,
-    poster: '../images/Miracle_poster.jpg',
-    title: '기적',
-    rating: 5
-  },
-  {
-    id: 2,
-    poster: '../images/Miracle_poster.jpg',
-    title: '기적',
-    rating: 5
-  },
-  {
-    id: 3,
-    poster: '../images/Miracle_poster.jpg',
-    title: '기적',
-    rating: 5
-  },
-  {
-    id: 4,
-    poster: '../images/Miracle_poster.jpg',
-    title: '기적',
-    rating: 5
-  },
-  {
-    id: 5,
-    poster: '../images/Miracle_poster.jpg',
-    title: '기적',
-    rating: 5
-  },
-  {
-    id: 6,
-    poster: '../images/Miracle_poster.jpg',
-    title: '기적',
-    rating: 5
-  },
-  {
-    id: 7,
-    poster: '../images/Miracle_poster.jpg',
-    title: '기적',
-    rating: 5
-  }
-];
+import axios from 'axios';
+import APIService from '../service/APIService';
+import { Link } from 'react-router-dom';
 
 const collection = [
   {
@@ -57,8 +17,40 @@ const collection = [
   }
 ];
 
+const AWSAPI = APIService.AWSAPI;
+
+
 function MyBooks() {
   const [tabNumber, setTabNumber] = useState(1);
+  const account = useSelector(state => state.auth.account);
+  const [evaluatedMovieList, setEvaluatedMovieList] = useState([])
+
+  useEffect(() => {
+    async function EvaluatedMovies() {
+      try {
+        const response = await axios({
+          method: 'POST',
+          url: `${AWSAPI}/user/userMovieGrade`,
+          data: {
+            account: account
+          }
+        })
+        const result = response.data.result;
+        let movieBox = [];
+        // const evaluatedMoviesList = result.map((v, i) => {
+        //   return v.movieNm
+        // });
+        for (let i = 0; i < result.length; i++) {
+          movieBox = [...movieBox, { movieNm: result[i].movieNm, movieCd: result[i].movieCd, grade: result[i].grade }]
+        }
+        console.log(movieBox);
+        setEvaluatedMovieList(movieBox);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    EvaluatedMovies();
+  }, [account])
 
   return (
     <>
@@ -78,11 +70,13 @@ function MyBooks() {
           </div>
           <div className="tab-menu-content1" style={tabNumber === 1 ? { display: 'block' } : { display: 'none' }}>
             <ul>
-              {evaluated !== null && evaluated.map((v) => (
+              {evaluatedMovieList !== null && evaluatedMovieList.map((v) => (
                 <li>
-                  <img src={v.poster} alt="기적" />
-                  <p>{v.title}</p>
-                  <p><span><FullStar1 /></span>{v.rating + '.0'}점으로 평가함</p>
+                  <Link to={`/detail/${v.movieCd}`}>
+                    <img src='../images/no-images.png' alt="이미지 준비중" />
+                    <p>{v.movieNm}</p>
+                    <p><span><FullStar1 /></span>{v.grade}점으로 평가함</p>
+                  </Link>
                 </li>
               ))}
             </ul>

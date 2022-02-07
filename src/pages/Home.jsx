@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import './home.scss';
 
 import HeaderTemplate from '../components/HeaderTemplate';
@@ -12,19 +11,22 @@ import { startGetBoxOfficeListActionCreator } from '../redux/modules/boxoffice';
 import BoxOffice from '../components/BoxOffice';
 import TokenService from '../service/TokenService';
 import AccountService from '../service/AccountService';
+import CineSuggestion from '../components/CineSuggestion';
+import AverageRanking from '../components/AverageRanking';
 
 
-function Home({ history }) {
+function Home() {
 
   const dispatch = useDispatch();
   const boxOfficeList = useSelector((state) => state.boxoffice.boxOfficeList);
   const [modalId, setModalId] = useState(0);
   const token = useSelector(state => state.auth.token);
   const account = useSelector(state => state.auth.account);
+  const userName = useSelector(state => state.auth.userName);
 
   if (token && account) {
     TokenService.save(token);
-    AccountService.save(account);
+    AccountService.save(account, userName);
   }
 
   const show = useCallback((id) => {
@@ -33,27 +35,6 @@ function Home({ history }) {
   const hide = useCallback(() => {
     setModalId(0);
   }, []);
-
-  //  if (!localStorage.getItem('token')) {
-  //   history.push('/signin')
-  // }
-
-  function goLogin() {
-    history.push('/signin');
-  }
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const response = await axios.get('http://cinesquare.yahmedora.com:8080/movie/boxoffice')
-  //       setBoxoffice(response.data.result)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   fetchData();
-  // }, [setBoxoffice])
-
 
   const getBoxOfficeList = useCallback(() => {
     dispatch(startGetBoxOfficeListActionCreator());
@@ -73,110 +54,7 @@ function Home({ history }) {
         {modalId > 0 && <VideoFrameContainer hide={hide} id={modalId} />}
         <section>
           <article className="rank cine-square-rank">
-            {/* <h3>랜덤 추천 영화 순위</h3> */}
-            <h3>씨네스퀘어 영화 추천</h3>
-            <div className="slide-container">
-              <ul>
-                <li>
-                  <p className="ranking">1</p>
-                  <img src="../images/cruella.jpg" alt="cruella" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">2</p>
-                  <img src="../images/voyagers.jpg" alt="voyagers" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">3</p>
-                  <img src="../images/Fast_and_the_Furious.jpg" alt="Fast_and_the_Furious" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">4</p>
-                  <img src="../images/pipe_line.jpg" alt="pipe_line" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div></li>
-                <li>
-                  <p className="ranking">5</p>
-                  <img src="../images/poupelle.jpg" alt="poupelle" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">1</p>
-                  <img src="../images/cruella.jpg" alt="cruella" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">2</p>
-                  <img src="../images/voyagers.jpg" alt="voyagers" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">3</p>
-                  <img src="../images/Fast_and_the_Furious.jpg" alt="Fast_and_the_Furious" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">4</p>
-                  <img src="../images/pipe_line.jpg" alt="pipe_line" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div></li>
-                <li>
-                  <p className="ranking">5</p>
-                  <img src="../images/poupelle.jpg" alt="poupelle" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <CineSuggestion />
           </article>
 
           <article className="rank box-office-rank">
@@ -186,126 +64,26 @@ function Home({ history }) {
 
           <article className="rank highly-rated-rank">
             <h3>평균 별점 높은 순위</h3>
-            <div className="slide-container">
-              <ul>
-                <li>
-                  <p className="ranking">1</p>
-                  <img src="../images/cruella.jpg" alt="cruella" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">2</p>
-                  <img src="../images/voyagers.jpg" alt="voyagers" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">3</p>
-                  <img src="../images/Fast_and_the_Furious.jpg" alt="Fast_and_the_Furious" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">4</p>
-                  <img src="../images/pipe_line.jpg" alt="pipe_line" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div></li>
-                <li>
-                  <p className="ranking">5</p>
-                  <img src="../images/poupelle.jpg" alt="poupelle" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">1</p>
-                  <img src="../images/cruella.jpg" alt="cruella" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">2</p>
-                  <img src="../images/voyagers.jpg" alt="voyagers" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">3</p>
-                  <img src="../images/Fast_and_the_Furious.jpg" alt="Fast_and_the_Furious" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-                <li>
-                  <p className="ranking">4</p>
-                  <img src="../images/pipe_line.jpg" alt="pipe_line" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div></li>
-                <li>
-                  <p className="ranking">5</p>
-                  <img src="../images/poupelle.jpg" alt="poupelle" />
-                  <div className="movie-info">
-                    <p className="movie-title">크루엘라</p>
-                    <span>2021미국</span>
-                    <p>평균 3.7</p>
-                    <span>예매율 30% 누적관객 1,681명</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            <AverageRanking />
           </article>
-          <article className="my-collection-wrapper">
+          {/* <article className="my-collection-wrapper">
             <div className="my-collection">
               <h3>마이컬렉션</h3>
-              {/* <ul>
+              <ul>
                 <li></li>
                 <li></li>
                 <li></li>
-              </ul> */}
+              </ul>
               <div></div>
             </div>
-          </article>
+          </article> */}
         </section>
       </main>
       <FooterTemplate />
 
     </>
   );
+
 }
 
 export default React.memo(Home);

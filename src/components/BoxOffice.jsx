@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 let slideIndex = 0;
 
@@ -16,7 +16,7 @@ function BoxOffice({ boxOfficeList }) {
           {boxOfficeList.map((v, i) => (
             <li>
               <p className="ranking">{i + 1}</p>
-              <img src={`${v.mainImg}`} alt={v.movieNm} />
+              <img src={v.mainImg} alt={v.movieNm} />
               <div className="movie-info">
                 <p className="movie-title">{v.movieNm}</p>
                 <span>{v.reportDt}</span>

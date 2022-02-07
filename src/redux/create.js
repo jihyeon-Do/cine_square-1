@@ -5,11 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'connected-react-router';
 import rootSaga from './middleware/saga';
 import TokenService from '../service/TokenService';
-import UserService from '../service/UserService';
 import AccountService from '../service/AccountService';
-// const store = createStore(rootReducer);
-
-// export const history = createBrowserHistory();
 
 export const sagaMiddleware = createSagaMiddleware();
 
@@ -19,7 +15,8 @@ export default function create(history) {
     {
       auth: {
         token: TokenService.get(),
-        account: AccountService.get(),
+        account: AccountService.getAccount(),
+        userName: AccountService.getUserName(),
         loading: false,
         error: null,
       },
@@ -32,17 +29,3 @@ export default function create(history) {
 
   return store;
 }
-
-// export default function create() {
-//   return createStore(
-//     rootReducer,
-//     {
-//       auth: {
-//         token: TokenService.get(),
-//         loading: false,
-//         error: null,
-//       },
-//     },
-//     composeWithDevTools(applyMiddleware()),
-//   );
-// }

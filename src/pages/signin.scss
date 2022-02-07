@@ -89,10 +89,7 @@
         border-radius: 50px;
         cursor: pointer;
         background-size: contain;
-        &.signup-btn {
-          background-color: #4e4e4e;
-          margin-top: 17px;
-        }
+
         &.login-btn {
           background-color: #6100ff;
         }
@@ -100,6 +97,22 @@
       .naver-btn {
         img {
           border-radius: 50px;
+        }
+      }
+
+      .btn-box {
+        display: flex;
+        justify-content: space-between;
+        .cancel-btn {
+          background-color: #2c2c2c;
+          margin-top: 17px;
+          margin-left: 10px;
+        }
+
+        .signup-btn {
+          background-color: #4e4e4e;
+          margin-top: 17px;
+          margin-right: 10px;
         }
       }
 

@@ -1,10 +1,10 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import SearchButton from '../SearchButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 import { startGetSearchValueActionCreator } from '../redux/modules/search';
 import { startGetSearchListActionCreator } from '../redux/modules/search';
+import { startLogoutActionCreator } from '../redux/modules/auth';
 
 import './headerTemplate.scss';
 import TokenService from '../service/TokenService';
@@ -18,7 +18,7 @@ export default function HeaderTemplate() {
   const dispatch = useDispatch();
   const keyword = useSelector(state => state.search.value);
   const urlParameter = useSelector(state => state.router.location.pathname);
-  const token = TokenService.get('token');
+  const token = useSelector(state => state.auth.token);
 
   const getValue = useCallback(() => {
     dispatch(startGetSearchValueActionCreator(value));
@@ -31,6 +31,17 @@ export default function HeaderTemplate() {
     }
   }, [urlParameter, keyword])
 
+  function logOut() {
+    TokenService.delete();
+    AccountService.deleteAccount();
+    AccountService.deleteUserName();
+    logoutUser()
+  }
+  const logoutUser = useCallback(() => {
+    dispatch(startLogoutActionCreator());
+    dispatch(push('/'));
+  }, [dispatch])
+
   return (
     <header className="header-container">
       <div className="header-wrapper">
@@ -41,17 +52,6 @@ export default function HeaderTemplate() {
           <div className="input-box" role="search">
             <input ref={searchInput} onKeyUp={(e) => handleSearch(e)} type="text" value={value} onChange={search} placeholder="검색" aria-label="영화검색창" />
             <button ref={searchClickButton} className="search-button" onClick={(e) => handleSearch(e)}>검색버튼</button>
-            {/* <div className="search-list" style={{ display: _display ? 'block' : 'none' }}>
-              <ul>
-                {
-                  result.map((v) => (
-                    regexp.test(v.movieNm) &&
-                    <li>
-                      <Link>{v.movieNm}</Link>
-                    </li>
-                  ))}
-              </ul>
-            </div> */}
           </div>
           <div className="my-profile-btn">
             {token && (
@@ -65,8 +65,7 @@ export default function HeaderTemplate() {
             {!token && (
               <div>
                 <Link to="/signin">로그인</Link>
-                <Link to="/" disabled>회원가입</Link>
-                {/* <Link to="/signup">회원가입</Link> */}
+                <Link to="/signup">회원가입</Link>
               </div>
             )
             }
@@ -77,15 +76,6 @@ export default function HeaderTemplate() {
 
   )
 
-  function logOut() {
-    TokenService.delete();
-    AccountService.delete();
-
-    if (!token) {
-      dispatch(push('/'))
-    }
-  }
-
   function search(e) {
     setValue(e.target.value);
   }
@@ -93,13 +83,6 @@ export default function HeaderTemplate() {
   async function handleSearch(e) {
     if (value === '') return;
     if (e.key === 'Enter' || e.target === searchClickButton.current) {
-      // try {
-      //   const response = await axios.get(`http://localhost:8080/movie/search?searchWord=${value}`)
-      //   const result = response.data.result
-      //   console.log(result)
-      // } catch (error) {
-      //   console.log(error)
-      // }
       getValue();
       dispatch(push(`/search/${value}`));
     }
