@@ -20,18 +20,17 @@ const { naver } = window;
 
 export default function Signup() {
 
-  // const overlap = false
-
   const [account, setAccount] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmAccount, setConfirmAccount] = useState(false);
   const [confirmCode, setConfirmCode] = useState(false);
-
-  // const [confirmPassword, setConfirmPassword] = useState(false)
+  const [confirmRegExp, setConfirmRegExp] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
   const [checked, setChecked] = useState(false);
-  // const [samePassword, setSamePassword] = useState(false)
-  // const samePasswordRef = useRef('');
+  const [samePassword, setSamePassword] = useState(false);
+  const samePasswordRef = useRef('');
+  const passwordRef = useRef("");
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -72,20 +71,24 @@ export default function Signup() {
 
   }, []);
 
-  function onClick() {
-    console.log(checked);
-    if (checked) {
-      setChecked(false);
-    } else {
-      setChecked(true);
-      console.log(checked);
-    }
+
+  function isChecked() {
+    setChecked(!checked);
   }
 
   async function signUp() {
+    if (account === null ||
+      userName === null ||
+      password === null ||
+      account === '' ||
+      userName === '' ||
+      password === '' ||
+      confirmCode === false ||
+      confirmRegExp === true ||
+      confirmPassword === true ||
+      samePassword === true ||
+      checked === false) return;
     try {
-      console.log(account);
-      console.log(password);
       const response = await axios({
         method: 'POST',
         url: `${AWSAPI}/user/signup`,
@@ -93,6 +96,7 @@ export default function Signup() {
         data: {
           account: account,
           password: password,
+          userName: userName,
         }
       })
       console.log(response.data.result);
@@ -118,27 +122,26 @@ export default function Signup() {
                 <input value={account} onChange={handleAccountChange} type="text" aria-label="이메일" placeholder="이메일주소" />
                 <button type="button" onClick={isEmail}>중복확인</button>
               </div>
-              {/* <p className={confirmAccount ? 'comfirm-active' : ''}>* 이메일 형식에 맞지 않습니다</p> */}
-              <p>* 이메일 형식에 맞지 않습니다</p>
+              <p className={confirmRegExp ? 'comfirm-active' : ''}>* 이메일 형식에 맞지 않습니다</p>
             </div>
 
             <div className="name-form">
               <input type="text" aria-label="이름" placeholder="이름" value={userName} onChange={handleNameChange} />
+              {/* <p className={confirmName ? 'comfirm-active' : ''}>이름을 입력하세요</p> */}
             </div>
             <div className="password-form">
               {/* <input ref={passwordRef} type="password" aria-label="비밀번호" placeholder="비밀번호" onChange={isPassword} /> */}
-              <input type="password" aria-label="비밀번호" placeholder="비밀번호" value={password} onChange={handlePasswordChange} />
-              {/* <p className={confirmPassword ? 'comfirm-active' : ''}>* 8 ~ 15자 사이로 영문, 숫자, 특수문자 모두 사용해주세요</p> */}
-              <p >* 8 ~ 15자 사이로 영문, 숫자, 특수문자 모두 사용해주세요</p>
+              <input ref={passwordRef} type="password" aria-label="비밀번호" placeholder="비밀번호" value={password} onChange={handlePasswordChange} />
+              <p className={confirmPassword ? 'comfirm-active' : ''}>* 8 ~ 15자 사이로 영문, 숫자, 특수문자 모두 사용해주세요</p>
             </div>
-
+            <div className="password-comfirm-form">
+              <input ref={samePasswordRef} type="password" aria-label="비밀번호확인" placeholder="비밀번호 확인" onChange={issamePassword} />
+              <p className={samePassword ? 'comfirm-active' : ''}>* 비밀번호가 일치하지 않습니다</p>
+            </div>
             <div className="terms">
-              {/* <label>
-                <input type="checkbox" name="terms-of-service" value="terms-of-service" onChange={isChecked} checked={checked ? 'checked' : ''} />
-                이용약관 및 개인정보 수집 및 이용에 동의합니다.
-              </label> */}
               <label>
-                <input type="checkbox" name="terms-of-service" onClick={onClick} checked={checked} />
+                {/* <input type="checkbox" name="terms-of-service" onClick={onClick} checked={checked} /> */}
+                <input type="checkbox" name="terms-of-service" value="terms-of-service" onChange={isChecked} checked={checked ? 'checked' : ''} />
                 이용약관 및 개인정보 수집 및 이용에 동의합니다.
               </label>
             </div>
@@ -164,11 +167,21 @@ export default function Signup() {
         setConfirmAccount={setConfirmAccount}
         confirmCode={confirmCode}
         setConfirmCode={setConfirmCode} />
+      <div className='confirm-popup-background' style={{ display: confirmAccount ? 'block' : 'none' }}></div>
     </main>
+
   );
 
   function handleAccountChange(e) {
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    if (regExp.test(account)) {
+      setConfirmRegExp(false);
+    } else {
+      setConfirmRegExp(true);
+    }
+
     setAccount(e.target.value);
+
   }
 
 
@@ -176,8 +189,27 @@ export default function Signup() {
     setUserName(e.target.value);
   }
 
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
+  function handlePasswordChange() {
+    const password = passwordRef.current.value;
+    var regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+    if (regExp.test(password)) {
+      setConfirmPassword(false);
+    } else {
+      setConfirmPassword(true);
+    }
+    setPassword(password);
+
+  }
+
+
+  function issamePassword() {
+    const password = passwordRef.current.value;
+    const samePasswordValue = samePasswordRef.current.value;
+    if (password === samePasswordValue) {
+      setSamePassword(false);
+    } else {
+      setSamePassword(true);
+    }
   }
 
 
@@ -189,7 +221,10 @@ export default function Signup() {
   async function isEmail() {
     try {
       // const response = await axios.post(`${LOCALAPI}/user/signup/valid`, { account });
-      if (!account) return;
+      if (!account) {
+        alert('이메일을 입력하세요');
+        return;
+      };
       const response = await axios.post(`${AWSAPI}/user/signup/valid`, { account })
       if (response.data.result) {
         alert('사용가능한 이메일 입니다.')

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ConnectedRouter } from 'connected-react-router';
 
@@ -10,12 +10,10 @@ import Signin from './pages/Signin';
 import Complete from './pages/Complete';
 import Search from './pages/Search';
 import NotFound from './pages/NotFound';
-import HeaderTemplate from './components/HeaderTemplate';
-import FooterTemplate from './components/FooterTemplate';
 import Signup from './pages/Signup';
 import Detail from './pages/Detail';
 import Profile from './pages/Profile';
-import Evaluate from './pages/Evaluate';
+// import Evaluate from './pages/Evaluate';
 import MyBooks from './pages/MyBooks';
 
 function App({ history }) {

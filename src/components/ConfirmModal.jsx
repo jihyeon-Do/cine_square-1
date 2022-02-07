@@ -2,19 +2,14 @@ import React, { useState, useEffect } from 'react';
 import AuthAlert from './AuthAlert';
 import axios from 'axios';
 import APIService from '../service/APIService';
+import './confirmModal.scss';
 
 const AWSAPI = APIService.AWSAPI;
 const LOCALAPI = APIService.LOCALAPI;
 
-function ConfirmModal({ account, confirmAccount, setConfirmAccount, confirmCode, setConfirmCode }) {
-  // const [result, setResult] = useState(true);
-  const [result, setResult] = useState(0);
-  // const [notice, setNotice] = useState('이미 사용중인 이메일입니다');
+function ConfirmModal({ account, confirmAccount, setConfirmAccount, setConfirmCode }) {
   const [code, setCode] = useState('');
   const [value, setValue] = useState('')
-  // useEffect(() => {
-
-  // }, [result])
 
   return (
     <div className="confirm-popup" style={{ display: confirmAccount ? 'block' : 'none' }}>
@@ -23,36 +18,24 @@ function ConfirmModal({ account, confirmAccount, setConfirmAccount, confirmCode,
           <legend>인증하기</legend>
           <div>
             <input type="text" aria-label="이메일" placeholder="이메일주소" value={account} />
-            {/* <button type="button" onClick={() => duplicate(result)}>중복확인</button> */}
-            {/* <button type="button" onClick={() => duplicate(1)}>중복확인</button> */}
             <button type="button" onClick={() => duplicate()}>인증번호요청</button>
           </div>
           <div>
             <input onChange={duplicateNumber} type="text" aria-label="인증번호입력" placeholder="인증번호입력" value={value} />
+            <button type="button" onClick={duplicateConfirm}>인증번호확인</button>
           </div>
-          <button type="button" onClick={duplicateConfirm}>인증번호확인</button>
+          <button type="button" className='cancel' onClick={duplicateCancel}>취소</button>
         </fieldset>
       </form>
-      {/* {result === 1 && <AuthAlert notice={notice} setResult={setResult} />} */}
-      {/* {result === 2 && <AuthAlert notice={notice} setResult={setResult} />} */}
-      {/* <AuthAlert notice={noi}/> */}
     </div>
   );
 
-  // function duplicate(result) {
-  //   console.log('1')
-  //   var notice = '';
-  //   if (result) {
-  //     console.log('2')
-  //     notice = '사용할 수 있는 이메일입니다.'
-  //   } else {
-  //     console.log('3')
-  //     notice = '이미 사용중인 이메일입니다.'
-  //   }
-  //   return <AuthAlert notice={notice} />
-  // }
   function duplicateNumber(e) {
     setValue(e.target.value)
+  }
+
+  function duplicateCancel() {
+    setConfirmAccount(false);
   }
 
   async function duplicate(num) {
@@ -71,14 +54,7 @@ function ConfirmModal({ account, confirmAccount, setConfirmAccount, confirmCode,
     } catch (error) {
       console.log(error);
     }
-    // setResult(num)
-    // if (result === 1) {
-    //   // setResult
-    //   // notice = '사용할 수 있는 이메일입니다.' setNotice
-    // } else if (result === 2) {
-    //   // setResult
-    //   // notice = '이미 사용중인 이메일입니다.'setNotice
-    // }
+
   }
 
   function duplicateConfirm() {
@@ -95,6 +71,3 @@ function ConfirmModal({ account, confirmAccount, setConfirmAccount, confirmCode,
 }
 
 export default ConfirmModal;
-
-// 컨펌되면 코드 없애게 했는데 컨펌을 없애면 됐는지 안됐는지 모른다.
-// 그러고 회원가입을 그냥 누를수 없게 만들어야 한다. setComfirmCode.

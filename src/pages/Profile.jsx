@@ -4,20 +4,56 @@ import FooterTemplate from '../components/FooterTemplate';
 import HeaderTemplate from '../components/HeaderTemplate'
 import '../pages/profile.scss';
 import { Chart, registerables } from 'chart.js';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import APIService from '../service/APIService';
+
+const AWSAPI = APIService.AWSAPI;
+
+
+let evaluatedMovieCount = [];
+let evaluatedMovieGrade = [];
 
 export default function Profile() {
 
   const [imgUrl, setImgUrl] = useState(null);
   const imageRef = useRef('');
   const canvasDom = useRef(null);
+  const [evaluatedCount, setEvaluatedCount] = useState([]);
+  const [evaluatedGrade, setEvaluatedGrade] = useState([]);
+  const [totalCount, setTotalCount] = useState();
+  const [evaluatedMovieList, setEvaluatedMovieList] = useState([])
 
   const account = useSelector(state => state.auth.account);
   const userName = useSelector(state => state.auth.userName);
-  // const cineToken = localStorage.getItem('token');
-  // const token = useSelector(state => state.auth.token);
+
+  useEffect(() => {
+    async function Evaluated() {
+      try {
+        const response = await axios({
+          method: 'POST',
+          url: `${AWSAPI}/user/gradeList`,
+          data: {
+            account: account
+          },
+        })
+        const result = response.data.result;
+        evaluatedMovieCount = result.map((v) => +v.count);
+        evaluatedMovieGrade = result.map((v) => v.grade + '점');
+        setEvaluatedCount(evaluatedMovieCount);
+        setEvaluatedGrade(evaluatedMovieGrade);
+        let a = 0;
+        for (let i = 0; i < evaluatedMovieCount.length; i++) {
+          a += evaluatedMovieCount[i]
+        }
+        setTotalCount(a);
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    Evaluated();
+  }, [account])
 
 
   useEffect(() => {
@@ -25,15 +61,15 @@ export default function Profile() {
     var myChart = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["1점", "2점", "3점", "4점", "5점"],
+        labels: evaluatedGrade,
         datasets: [
           {
             barPercentage: 1,
-            barThickness: 50,
-            minBarLength: 2,
+            barThickness: 30,
+            // minBarLength: 2,
             backgroundColor: '#6100ff',
-            label: "내가 준 별점",
-            data: [550, 30, 240, 100, 100],
+            label: "내가 해당 점수로 평가한 영화 갯수",
+            data: evaluatedCount,
           },
         ],
       },
@@ -41,33 +77,42 @@ export default function Profile() {
     return () => {
       myChart.destroy();
     }
-  }, []);
+  }, [evaluatedCount, evaluatedGrade]);
 
   Chart.register(...registerables);
 
   const hanedleImgChange = (e) => {
-    // const formData = new FormData();
-    // formData.append({ [e.target.name]: e.target.value })
-    // formData.append('file', e.target.files[0]);
     const fileUrl = e.target.files[0];
     const objectURL = URL.createObjectURL(fileUrl);
     setImgUrl(objectURL);
   }
 
-  // async function userInfoFunc () {
-  //   try {
-  //     const response = await axios({
-  //       method:'POST',
-  //       url:'http://localhost:8080/user/userInfo',
-  //       data: {
-  //         cineToken
-  //       },
-  //     })
-  //     return response
-  //   }catch (e) {
-  //     console.log(e)
-  //   }
-  // }
+  useEffect(() => {
+    async function EvaluatedMovies() {
+      try {
+        const response = await axios({
+          method: 'POST',
+          url: `${AWSAPI}/user/userMovieGrade`,
+          data: {
+            account: account
+          }
+        })
+        const result = response.data.result;
+        let movieBox = [];
+        // const evaluatedMoviesList = result.map((v, i) => {
+        //   return v.movieNm
+        // });
+        for (let i = 0; i < 5; i++) {
+          movieBox = [...movieBox, { movieNm: result[i].movieNm, movieCd: result[i].movieCd }]
+        }
+        console.log(movieBox);
+        setEvaluatedMovieList(movieBox);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    EvaluatedMovies();
+  }, [account])
 
   return (
     <>
@@ -107,8 +152,8 @@ export default function Profile() {
             <div className="profile-info-cont1 cont">
               <h3>영화 감상 시간</h3>
               <div>
-                <p>56시간</p>
-                <p>무려 31편의 영화를 보셨어요!</p>
+                <p>우와</p>
+                <p>무려 {totalCount}편의 영화를 보셨어요!</p>
               </div>
             </div>
             <div className="profile-info-cont2 cont">
@@ -138,8 +183,14 @@ export default function Profile() {
             <div className="profile-info-cont5 cont">
               <h3>내가 평가한 영화</h3>
               <ul>
-                <li>
-                  <img src="../images/cruella.jpg" alt="cruella" />
+                {evaluatedMovieList.map((v) => (
+                  <li>
+                    <p><Link to={`/detail/${v.movieCd}`}>{v.movieNm}</Link></p>
+                  </li>
+                ))
+                }
+                {/* <li>
+                  <img src="../images/with-god.jpg" alt="신과함께" />
                 </li>
                 <li>
                   <img src="../images/voyagers.jpg" alt="voyagers" />
@@ -152,9 +203,9 @@ export default function Profile() {
                 </li>
                 <li>
                   <img src="../images/poupelle.jpg" alt="poupelle" />
-                </li>
+                </li> */}
               </ul>
-              <Link to="/mybooks">더보기</Link>
+              <Link to="/mybooks" className='add'>더보기</Link>
             </div>
             <div className="profile-info-cont6 cont">
               <h3>마이 컬렉션</h3>
@@ -175,7 +226,7 @@ export default function Profile() {
                   <img src="../images/poupelle.jpg" alt="poupelle" />
                 </li>
               </ul>
-              <Link to="/mybooks">더보기</Link>
+              <Link to="/mybooks" className='add'>더보기</Link>
             </div>
           </div>
         </section>

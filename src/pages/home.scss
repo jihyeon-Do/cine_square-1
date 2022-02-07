@@ -102,7 +102,9 @@ $border-color: #eee;
       }
     }
 
-    .box-office-rank {
+    .box-office-rank,
+    .cine-square-rank,
+    .highly-rated-rank {
       position: relative;
       button {
         background: none;
@@ -115,6 +117,7 @@ $border-color: #eee;
         top: 50%;
         margin-top: -20px;
         left: -50px;
+        display: none;
       }
       .next-btn {
         top: 50%;
