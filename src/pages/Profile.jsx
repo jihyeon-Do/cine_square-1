@@ -105,7 +105,6 @@ export default function Profile() {
         for (let i = 0; i < 5; i++) {
           movieBox = [...movieBox, { movieNm: result[i].movieNm, movieCd: result[i].movieCd }]
         }
-        console.log(movieBox);
         setEvaluatedMovieList(movieBox);
       } catch (error) {
         console.log(error)

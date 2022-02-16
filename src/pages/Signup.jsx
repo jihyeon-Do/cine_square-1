@@ -99,7 +99,6 @@ export default function Signup() {
           userName: userName,
         }
       })
-      console.log(response.data.result);
       if (response.data.result) {
         alert('회원가입이 완료되었습니다');
         dispatch(push('/'));

@@ -10,7 +10,6 @@ export default class SearchService {
       // `${LOCALAPI}/movie/search?searchWord=${value}`,
       `${AWSAPI}/movie/search?searchWord=${value}`,
     );
-    console.log(response);
     return response.data.result;
   }
 }

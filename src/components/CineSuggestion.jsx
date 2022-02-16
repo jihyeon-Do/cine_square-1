@@ -108,7 +108,7 @@ function CineSuggestion() {
       <div className="slide-container">
         <ul ref={slideWrap}>
           {CineSuggestionMovie.map((v, i) => (
-            <li>
+            <li key={i}>
               <Link to={`/detail/${v.movieCd}`}>
                 <p className="ranking">{v.id}</p>
                 <img src={v.mainImg} alt={v.movieNm} />

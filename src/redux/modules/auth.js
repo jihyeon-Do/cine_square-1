@@ -1,4 +1,4 @@
-import { put, call, takeEvery, cancel, getContext } from 'redux-saga/effects';
+import { put, call, takeEvery, cancel } from 'redux-saga/effects';
 import UserService from '../../service/UserService';
 import { push } from 'connected-react-router';
 
@@ -127,7 +127,6 @@ export const startLogoutActionCreator = () => ({
 
 // 7. saga-reducer
 function* startGetUserInfoSaga(action) {
-  // console.log(action);
   try {
     yield put(loginStart());
     const { account_id, password } = action.payload;
@@ -137,7 +136,6 @@ function* startGetUserInfoSaga(action) {
       return false;
     }
     const { cineToken, account, userName } = user;
-    console.log(cineToken, account, userName);
     yield put(loginSuccess(cineToken, account, userName));
     // const history = yield getContext('history');
     // history.push('/');

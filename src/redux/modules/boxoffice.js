@@ -64,10 +64,8 @@ export const startGetBoxOfficeListActionCreator = () => ({
 
 function* startGetBoxOfficeListSaga(action) {
   yield put(getBoxOfficeListStart());
-  console.log(action);
   try {
     const response = yield call(BoxOfficeService.getBoxOfficeList);
-    console.log(response);
     yield put(getBoxOfficeListSuccess(response));
   } catch (error) {
     console.log(error);

@@ -139,14 +139,13 @@ function* startGetSearchValueSaga(action) {
 }
 
 function* startGetSearchListSaga(action) {
-  // console.log(action);
   try {
     yield put(getSearchListStart());
     const { value } = action.payload;
     // aws 에 올라가면 주석 열면 된다. 지금 닫아놓은 이유는 서버에 올라가있지 않기 때문에 에러 발생함
     const list = yield call(SearchService.getSearchList, value);
     // const list = [];
-    // console.log(list);
+
     yield put(getSearchListSuccess(list));
   } catch (error) {
     console.log(error);
