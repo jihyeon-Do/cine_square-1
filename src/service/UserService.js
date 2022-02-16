@@ -12,7 +12,6 @@ export default class UserService {
       // `${LOCALAPI}/user/signin`,
       { account, password },
     );
-    console.log(response);
     if (response.data.result === null) {
       message.error('이메일 또는 비밀번호가 맞지 않습니다.');
       return false;

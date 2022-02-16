@@ -43,7 +43,6 @@ function MyBooks() {
         for (let i = 0; i < result.length; i++) {
           movieBox = [...movieBox, { movieNm: result[i].movieNm, movieCd: result[i].movieCd, grade: result[i].grade }]
         }
-        console.log(movieBox);
         setEvaluatedMovieList(movieBox);
       } catch (error) {
         console.log(error)

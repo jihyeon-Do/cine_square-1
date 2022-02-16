@@ -95,7 +95,7 @@ function AverageRanking() {
       <div className="slide-container">
         <ul ref={slideWrap}>
           {averageRanking.map((v, i) => (
-            <li>
+            <li key={i}>
               <p className="ranking">{v.id}</p>
               <img src={v.src} alt={v.title} />
               <div className="movie-info">
