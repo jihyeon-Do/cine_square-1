@@ -4,54 +4,22 @@ function AverageRanking() {
   const averageRanking = [
     {
       id: 1,
-      title: '로맨틱 홀리데이',
-      src: '../images/holiday.jpg',
-      release: 2006,
-      nation: '미국',
-      grade: '3.7'
+      title: ' 레옹',
+      src: ' ../images/leon.jpg',
+      release: 1994,
+      nation: '프랑스/미국',
+      grade: ' 4.2'
     },
     {
       id: 2,
-      title: '하우 투 비 싱글',
-      src: '../images/how-to-be-single.jpg',
-      release: 2016,
-      nation: '미국',
-      grade: '3.4'
-    },
-    {
-      id: 3,
-      title: '레옹',
-      src: '../images/leon.jpg',
-      release: 1994,
-      nation: '프랑스/미국',
-      grade: '4.2'
-    },
-    {
-      id: 4,
-      title: '화이트 칙스',
-      src: '../images/white-chicks.jpg',
-      release: 2004,
-      nation: '미국',
-      grade: '3.7'
-    },
-    {
-      id: 5,
-      title: '극장판 짱구는 못말려 10기: 태풍을 부르는 장엄한 전설의 전투',
-      src: '../images/zzang-gu.jpg',
+      title: ' 극장판 짱구는 못말려 10기: 태풍을 부르는 장엄한 전설의 전투',
+      src: ' ../images/zzang-gu.jpg',
       release: 2002,
-      nation: '일본',
+      nation: ' 일본',
       grade: '4.0'
     },
     {
-      id: 6,
-      title: '웨이 다운',
-      src: '../images/way-down.jpg',
-      release: 2021,
-      nation: '스페인/프랑스',
-      grade: '3.3'
-    },
-    {
-      id: 7,
+      id: 3,
       title: '미 비포 유',
       src: '../images/before.jpg',
       release: 2016,
@@ -59,20 +27,52 @@ function AverageRanking() {
       grade: '3.9'
     },
     {
-      id: 8,
-      title: '신과함께-인과 연',
-      src: '../images/with-god.jpg',
-      release: 2018,
-      nation: '한국',
+      id: 4,
+      title: '화이트 칙스 ',
+      src: '../images/white-chicks.jpg ',
+      release: 2004,
+      nation: '미국',
       grade: '3.7'
     },
     {
-      id: 9,
+      id: 5,
+      title: '로맨틱 홀리데이',
+      src: '../images/holiday.jpg',
+      release: 2006,
+      nation: ' 미국',
+      grade: ' 3.7'
+    },
+    {
+      id: 6,
+      title: ' 신과함께-인과 연',
+      src: ' ../images/with-god.jpg',
+      release: 2018,
+      nation: ' 한국',
+      grade: ' 3.7'
+    },
+    {
+      id: 7,
       title: '이퀼리브리엄',
       src: '../images/equili.jpg',
       release: 2002,
       nation: '미국',
       grade: '3.7'
+    },
+    {
+      id: 8,
+      title: '하우 투 비 싱글',
+      src: '../images/how-to-be-single.jpg',
+      release: 2016,
+      nation: '미국',
+      grade: '3.4'
+    },
+    {
+      id: 9,
+      title: '웨이 다운',
+      src: '../images/way-down.jpg',
+      release: 2021,
+      nation: '스페인/프랑스',
+      grade: '3.3'
     },
     {
       id: 10,
@@ -101,7 +101,7 @@ function AverageRanking() {
               <div className="movie-info">
                 <p className="movie-title">{v.title}</p>
                 <p>{v.release} {v.nation}</p>
-                <p>{v.grade}</p>
+                <p>평점 {v.grade}</p>
               </div>
             </li>
           ))}
