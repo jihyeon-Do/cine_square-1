@@ -23,12 +23,12 @@ function CineSuggestion() {
     },
     {
       id: 3,
-      "movieCd": "161967",
-      "movieNm": "기생충",
-      "openDt": "2019.05.30",
-      "nations": "한국",
-      "showTm": "131",
-      "mainImg": "../images/insect.jpg",
+      movieCd: "161967",
+      movieNm: "기생충",
+      openDt: "2019.05.30",
+      nations: "한국",
+      showTm: "131",
+      mainImg: "../images/insect.jpg",
     },
     {
       id: 4,
