@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AuthAlert from './AuthAlert';
-import axios from 'axios';
-import APIService from '../service/APIService';
 import './confirmModal.scss';
 
-const AWSAPI = APIService.AWSAPI;
-const LOCALAPI = APIService.LOCALAPI;
-
-function ConfirmModal({ account, confirmAccount, setConfirmAccount, setConfirmCode }) {
-  const [code, setCode] = useState('');
-  const [value, setValue] = useState('')
+function ConfirmModal({
+  code,
+  setCode,
+  duplicate,
+  confirmAccount,
+  account,
+  setConfirmAccount,
+  setConfirmCode,
+}) {
+  const [value, setValue] = useState('');
 
   return (
     <div className="confirm-popup" style={{ display: confirmAccount ? 'block' : 'none' }}>
@@ -17,7 +19,7 @@ function ConfirmModal({ account, confirmAccount, setConfirmAccount, setConfirmCo
         <fieldset>
           <legend>인증하기</legend>
           <div>
-            <input type="text" aria-label="이메일" placeholder="이메일주소" value={account} />
+            <input type="text" aria-label="이메일" placeholder="이메일주소" value={account} readOnly />
             <button type="button" onClick={() => duplicate()}>인증번호요청</button>
           </div>
           <div>
@@ -31,34 +33,15 @@ function ConfirmModal({ account, confirmAccount, setConfirmAccount, setConfirmCo
   );
 
   function duplicateNumber(e) {
-    setValue(e.target.value)
+    setValue(e.target.value.trim());
   }
 
   function duplicateCancel() {
     setConfirmAccount(false);
   }
 
-  async function duplicate(num) {
-    try {
-      const response = await axios({
-        method: 'POST',
-        url: `${AWSAPI}/user/signup/sendAuthMail`,
-        // url: `${LOCALAPI}/user/signup/sendAuthMail`,
-        data: {
-          account: account,
-        }
-      })
-      if (!response.data.result) return;
-      alert('해당 메일로 인증번호가 요청되었습니다.');
-      setCode(response.data.code);
-    } catch (error) {
-      console.log(error);
-    }
-
-  }
-
   function duplicateConfirm() {
-    if (!value && value !== code) {
+    if (value === null || value !== code) {
       alert('인증번호가 일치하지 않습니다');
       setConfirmCode(false);
     } else if (value === code) {
