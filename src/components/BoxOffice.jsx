@@ -14,7 +14,7 @@ function BoxOffice({ boxOfficeList }) {
       <div className="slide-container">
         <ul ref={slideWrap}>
           {boxOfficeList.map((v, i) => (
-            <li>
+            <li key={i}>
               <p className="ranking">{i + 1}</p>
               <img src={v.mainImg} alt={v.movieNm} />
               <div className="movie-info">
