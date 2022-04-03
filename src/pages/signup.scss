@@ -1,0 +1,191 @@
+@mixin form-space {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin button-style {
+  font-size: 0.9em;
+  // padding: 10px 30px;
+  width: 105px;
+  height: 55px;
+  border-radius: 5px;
+}
+
+$common-font-size: 0.8em;
+
+.signup-main {
+  width: 100%;
+  background-color: #222222;
+  // position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+  .signup-wrapper {
+    width: 600px;
+    // height: 1000px;
+    background-color: #2d2d2d;
+    color: white;
+    box-sizing: border-box;
+
+    legend {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    p {
+      font-size: $common-font-size;
+      color: #de2800;
+      margin-top: 3px;
+      display: none;
+      &.comfirm-active {
+        display: block;
+      }
+    }
+
+    input {
+      background-color: #5a5a5a;
+      border: 0;
+      padding: 10px 10px;
+      margin-right: 10px;
+      text-align: left;
+      width: 260px;
+      height: 55px;
+      font-size: 1.2em;
+      border-radius: 3px;
+    }
+    .signup-form {
+      padding: 70px 110px;
+      & > fieldset > div {
+        margin-bottom: 25px;
+      }
+    }
+    .account-form {
+      div {
+        @include form-space;
+        button {
+          background-color: #6100ff;
+          @include button-style;
+        }
+      }
+    }
+    .certification-number-form {
+      div {
+        @include form-space;
+        button {
+          background: rgba(97, 0, 255, 0.74);
+          @include button-style;
+        }
+      }
+    }
+
+    .name-form {
+      margin-bottom: 40px !important;
+      input {
+        width: 100%;
+        &.correct {
+          border: #05ff00;
+        }
+      }
+    }
+
+    .phone-number-form {
+      margin-bottom: 40px !important;
+      label {
+        display: block;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      input {
+        width: 100%;
+      }
+      // div {
+      //   display: flex;
+      // }
+      // input {
+      //   width: calc(100% / 3);
+      //   &:nth-of-type(3) {
+      //     margin-right: 0;
+      //   }
+      // }
+    }
+
+    .password-form {
+      input {
+        width: 100%;
+      }
+    }
+
+    .password-comfirm-form {
+      margin-bottom: 50px !important;
+      input {
+        width: 100%;
+      }
+    }
+    .terms {
+      text-align: center;
+      margin-bottom: 50px !important;
+      input {
+        width: 20px;
+        height: 20px;
+        vertical-align: sub;
+      }
+    }
+    .signup-btns {
+      display: flex;
+      justify-content: space-between;
+      button {
+        font-size: 1.3em;
+        font-weight: bold;
+        width: 175px;
+        height: 55px;
+        border-radius: 50px;
+        &:nth-of-type(1) {
+          background-color: #4e4e4e;
+        }
+        &:nth-of-type(2) {
+          background-color: #6100ff;
+        }
+      }
+    }
+
+    .social-btn {
+      border-top: 1px solid #868686;
+      margin-top: 60px;
+      p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1em;
+        margin: 2em 0;
+        text-align: center;
+        display: block !important;
+      }
+      ul {
+        display: flex;
+        li {
+          width: calc(100% / 2);
+          text-align: center;
+          button {
+            background: none;
+            text-indent: -9999px;
+            width: 50px;
+            height: 50px;
+            &.kakao_btn {
+              background-image: url(../images/kakao.svg);
+              background-size: contain;
+            }
+          }
+        }
+      }
+    }
+  }
+  .confirm-popup-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    display: none;
+  }
+}
