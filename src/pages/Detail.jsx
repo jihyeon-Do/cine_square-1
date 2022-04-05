@@ -19,6 +19,7 @@ import APIService from '../service/APIService';
 
 const AWSAPI = APIService.AWSAPI;
 const LOCALAPI = APIService.LOCALAPI;
+const PROXY = APIService.PROXY;
 
 const MAX_SCORE = 5;
 
@@ -69,7 +70,7 @@ export default function Detail({ match }) {
     async function getMovieInfo() {
       try {
         const response = await axios.get(
-          `${AWSAPI}/movie/movieInfo?movieCd=${movieCd}`,
+          `${PROXY}/movie/movieInfo?movieCd=${movieCd}`,
         );
         // const response = await axios.get(`${LOCALAPI}/movie/movieInfo?movieCd=${movieCd}`);
         setMovieInfo(response.data.result);
@@ -85,7 +86,7 @@ export default function Detail({ match }) {
       try {
         const response = await axios({
           method: 'POST',
-          url: `${AWSAPI}/user/gradeAndReview`,
+          url: `${PROXY}/user/gradeAndReview`,
           data: {
             cineToken: token,
             movieCd: movieCd,
@@ -105,7 +106,7 @@ export default function Detail({ match }) {
     try {
       const response = await axios({
         method: 'POST',
-        url: `${AWSAPI}/user/selectMovieGrade`,
+        url: `${PROXY}/user/selectMovieGrade`,
         // url: `${LOCALAPI}/user/selectMovieGrade`,
         data: {
           account: account,

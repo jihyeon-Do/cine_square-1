@@ -10,6 +10,7 @@ import axios from 'axios';
 import APIService from '../service/APIService';
 
 const AWSAPI = APIService.AWSAPI;
+const PROXY = APIService.PROXY;
 
 let evaluatedMovieCount = [];
 let evaluatedMovieGrade = [];
@@ -31,7 +32,7 @@ export default function Profile() {
       try {
         const response = await axios({
           method: 'POST',
-          url: `${AWSAPI}/user/gradeList`,
+          url: `${PROXY}/user/gradeList`,
           data: {
             account: account,
           },
@@ -89,7 +90,7 @@ export default function Profile() {
       try {
         const response = await axios({
           method: 'POST',
-          url: `${AWSAPI}/user/userMovieGrade`,
+          url: `${PROXY}/user/userMovieGrade`,
           data: {
             account: account,
           },

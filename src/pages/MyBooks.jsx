@@ -18,6 +18,7 @@ const collection = [
 ];
 
 const AWSAPI = APIService.AWSAPI;
+const PROXY = APIService.PROXY;
 
 function MyBooks() {
   const [tabNumber, setTabNumber] = useState(1);
@@ -29,7 +30,7 @@ function MyBooks() {
       try {
         const response = await axios({
           method: 'POST',
-          url: `${AWSAPI}/user/userMovieGrade`,
+          url: `${PROXY}/user/userMovieGrade`,
           data: {
             account: account,
           },
