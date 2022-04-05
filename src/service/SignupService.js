@@ -11,7 +11,6 @@ export default class SignupService {
       method: 'POST',
       url: `${PROXY}/user/signup`,
       // url: `${LOCALAPI}/user/signup`,
-      headers: { 'Content-Type': 'text/plain' },
       data: {
         account: account,
         password: password,
@@ -25,7 +24,6 @@ export default class SignupService {
       method: 'POST',
       url: `${PROXY}/user/signup/sendAuthMail`,
       // url: `${LOCALAPI}/user/signup/sendAuthMail`,
-      headers: { 'Content-Type': 'text/plain' },
       data: {
         account: account,
       },
@@ -36,7 +34,6 @@ export default class SignupService {
   static async emailAuthentication(account) {
     const response = await axios.post(`${PROXY}/user/signup/valid`, {
       account,
-      headers: { 'Content-Type': 'text/plain' },
     });
     return response.data.result;
   }
